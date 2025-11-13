@@ -3,7 +3,6 @@
 #include <cmath>
 
 
-
 int main()
 {
     std::cout << "Test de compilation" << std::endl;
