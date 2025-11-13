@@ -3,6 +3,11 @@
 
 #include "Evaluation.h"
 
+/**
+* On repose la question une deuxième fois si elle n'est pas réussie du premier coup
+* Si on échoue encore, on affiche la bonne réponse
+*/
+
 namespace test
 {
     class EvaluationSecondeChance
