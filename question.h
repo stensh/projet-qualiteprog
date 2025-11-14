@@ -4,13 +4,18 @@
 
 #ifndef PROJET_QUESTION_H
 #define PROJET_QUESTION_H
-
+#include <string>
 
 class question
 {
 public:
-question();
-~question();
+    question(std::string intitule, std::string texte);
+    virtual ~question() = default ;
+    void afficherQuestion();
+
+private:
+    std::string d_intitule;
+    std::string  d_texte;
 };
 
 
