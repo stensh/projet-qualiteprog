@@ -1,0 +1,13 @@
+//
+// Created by rquen on 14/11/2025.
+//
+
+#ifndef PROJET_QUALITEPROG_QUESTIONNAIRE_H
+#define PROJET_QUALITEPROG_QUESTIONNAIRE_H
+
+
+class questionnaire {
+};
+
+
+#endif //PROJET_QUALITEPROG_QUESTIONNAIRE_H
