@@ -10,7 +10,7 @@ question::question(const std::string& intitule, const std::string& texte):d_inti
 //Methodes qui renvoie directement l'intitule et le texte de la question
 std::string question::renvoieQuestion() const
 {
-    return d_intitule + '\'' + d_texte;
+    return d_intitule + '\n' + d_texte;
 }
 
 //Pour renvoyer uniquement l'intitule de la question
