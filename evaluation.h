@@ -8,7 +8,7 @@ namespace test
     public:
         evaluation();
         virtual ~evaluation() = default;
-        virtual void commencer() const = 0;
+        virtual void commencer(const int /*Questionnaire&*/ q) const = 0;
         virtual bool resteQuestions() const = 0;
         virtual int /* plutôt Question */ questionCourante() const = 0;
         virtual bool afficherBonneReponse() const = 0;

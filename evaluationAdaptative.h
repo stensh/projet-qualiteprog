@@ -12,7 +12,7 @@ namespace test
     {
     public:
         evaluationAdaptative();
-        void commencer() const override;
+        void commencer(const int /*Questionnaire&*/ q) const override;
     };
 } // test
 

@@ -13,7 +13,7 @@ namespace test
     {
     public:
         evaluationTest();
-        void commencer() const override;
+        void commencer(const int /*Questionnaire&*/ q) const override;
     };
 } // test
 
