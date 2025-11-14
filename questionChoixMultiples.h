@@ -13,10 +13,10 @@ class questionChoixMultiples: public question
 {
 public:
     questionChoixMultiples(const std::string& intitule,
-        const std::string& texte,const std::vector<int>& reponses); //Ici les reponses stockées sont les bonnes réponses
-    std::vector<int> reponses() const;
+        const std::string& texte,int reponse); //Ici la reponse stockée est la bonne réponse
+    int reponse() const;
 private:
-    std::vector<int> d_reponses;
+    int d_reponse;//La bonne réponse de la question
 };
 
 

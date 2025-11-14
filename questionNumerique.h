@@ -11,8 +11,8 @@ class questionNumerique: public question
 public:
     questionNumerique(std::string intitule,std::string texte,int reponse,int limMin,int limMax);
     int reponse() const ;
-    int limMin() const ;
-    int limMax() const ;
+    int limiteMin() const ;
+    int limiteMax() const ;
 private:
     int d_reponse, d_limMin, d_limMax;
 };

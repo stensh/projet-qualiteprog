@@ -22,7 +22,7 @@ int questionNumerique::limiteMin()const
 }
 
 //Renvoie la limite maximal
-int questionNumerique::limMax()const
+int questionNumerique::limiteMax()const
 {
     return d_limMax;
 }

@@ -7,11 +7,11 @@
 
 questionChoixMultiples::questionChoixMultiples(const std::string& intitule,
     const std::string& texte,
-    const std::vector<int>& reponses): question{intitule,texte},d_reponses{reponses}
+    int reponse): question{intitule,texte},d_reponse{reponse}
 {}
 
-std::vector<int> questionChoixMultiples::reponses() const
+int questionChoixMultiples::reponse() const
 {
-    return d_reponses;
+    return d_reponse;
 }
 

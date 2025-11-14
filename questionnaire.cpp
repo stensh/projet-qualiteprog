@@ -15,6 +15,4 @@ questionnaire::questionnaire():
 {}
 
 int questionnaire::chargeQuestionnaire()
-{
-
-}
+{}
