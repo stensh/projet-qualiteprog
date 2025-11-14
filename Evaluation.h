@@ -15,7 +15,7 @@ namespace test
         virtual void questionSuivante() const = 0;
         virtual void afficherResultats() const = 0;
     private:
-        int d_score, d_nbEssais;
+        int d_nbBonnesReponses, d_nbEssais;
     };
 } // test
 
