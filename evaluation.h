@@ -3,11 +3,11 @@
 
 namespace test
 {
-    class Evaluation
+    class evaluation
     {
     public:
-        Evaluation();
-        virtual ~Evaluation() = default;
+        evaluation();
+        virtual ~evaluation() = default;
         virtual void commencer() const = 0;
         virtual bool resteQuestions() const = 0;
         virtual int /* plutôt Question */ questionCourante() const = 0;

@@ -8,10 +8,10 @@
 
 namespace test
 {
-    class EvaluationAdaptative
+    class evaluationAdaptative
     {
     public:
-        EvaluationAdaptative();
+        evaluationAdaptative();
         void commencer() const override;
     };
 } // test

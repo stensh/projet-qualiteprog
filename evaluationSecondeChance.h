@@ -1,7 +1,7 @@
 #ifndef PROJET_QUALITEPROG_EVALUATIONSECONDECHANCE_H
 #define PROJET_QUALITEPROG_EVALUATIONSECONDECHANCE_H
 
-#include "Evaluation.h"
+#include "evaluation.h"
 
 /**
 * On repose la question une deuxième fois si elle n'est pas réussie du premier coup
@@ -10,10 +10,10 @@
 
 namespace test
 {
-    class EvaluationSecondeChance
+    class evaluationSecondeChance
     {
     public:
-        EvaluationSecondeChance();
+        evaluationSecondeChance();
         void commencer() const override;
     };
 } // test
