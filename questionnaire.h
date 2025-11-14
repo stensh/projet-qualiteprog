@@ -15,6 +15,8 @@ class questionnaire
         questionnaire();
         ~questionnaire();
 
+        std::unique_ptr<question> questionCourante(int crt);    //Renvoie la question demandée crt.
+
     private:
         std::vector<std::unique_ptr<question>> d_questionnaire;
 };
