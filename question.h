@@ -9,10 +9,11 @@
 class question
 {
 public:
-    question(std::string intitule, std::string texte);
+    question(const std::string& intitule, const std::string& texte);
     virtual ~question() = default ;
-    void afficher();
-
+    std::string renvoieQuestion() const;
+    std::string intituleQuestion() const;
+    std::string texteQuestion() const;
 private:
     std::string d_intitule;
     std::string  d_texte;

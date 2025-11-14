@@ -4,10 +4,21 @@
 
 #include "question.h"
 
-question::question(std::string intitule, std::string texte):d_intitule{intitule} , d_texte{texte}
+question::question(const std::string& intitule, const std::string& texte):d_intitule{intitule} , d_texte{texte}
 {}
 
-void question::afficher()
+//Methodes qui renvoie directement l'intitule et le texte de la question
+std::string question::renvoieQuestion() const
 {
-    std::cout << d_intitule << " : " << d_texte << std::endl;
+    return d_intitule + '\'' + d_texte;
+}
+
+//Pour renvoyer uniquement l'intitule de la question
+std::string question::intituleQuestion() const
+{
+    return d_intitule;
+}//Pour renvoyer uniquement le texte de la question
+std::string question::texteQuestion() const
+{
+    return d_texte;
 }
