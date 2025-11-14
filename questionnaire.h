@@ -5,8 +5,18 @@
 #ifndef PROJET_QUALITEPROG_QUESTIONNAIRE_H
 #define PROJET_QUALITEPROG_QUESTIONNAIRE_H
 
+#include <memory>
+#include <vector>
+#include "question.h"
 
-class questionnaire {
+class questionnaire
+{
+    public:
+        questionnaire();
+        ~questionnaire();
+
+    private:
+        std::vector<std::unique_ptr<question>> d_questionnaire;
 };
 
 
