@@ -7,3 +7,14 @@
 #include <iostream>
 #include <ostream>
 
+using std::cout;
+using std::cin;
+
+questionnaire::questionnaire():
+    d_questionnaire{}
+{}
+
+int questionnaire::chargeQuestionnaire()
+{
+
+}

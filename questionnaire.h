@@ -15,10 +15,13 @@ class questionnaire
         questionnaire();
         ~questionnaire();
 
+        int chargeQuestionnaire();  //0 si le fichier peut être lu
+                                    //1 si le fichier n'a pu être lu
+
         std::unique_ptr<question> questionCourante(int crt);    //Renvoie la question demandée crt.
 
     private:
-        std::vector<std::unique_ptr<question>> d_questionnaire;
+        std::vector<std::unique_ptr<question>> d_questionnaire; //Stock les différentes question du questionnaire
 };
 
 
