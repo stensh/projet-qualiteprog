@@ -15,7 +15,7 @@ class questionnaire
         questionnaire();
         ~questionnaire();
 
-        int chargeQuestionnaire();  //0 si le fichier peut être lu
+        int chargeQuestionnaire();  //0 si le fichier a été lu
                                     //1 si le fichier n'a pu être lu
 
         std::unique_ptr<question> questionCourante(int crt);    //Renvoie la question demandée crt.
