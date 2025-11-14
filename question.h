@@ -11,7 +11,7 @@ class question
 public:
     question(std::string intitule, std::string texte);
     virtual ~question() = default ;
-    void afficherQuestion();
+    void afficher();
 
 private:
     std::string d_intitule;
