@@ -3,3 +3,10 @@
 //
 
 #include "question.h"
+
+class question
+{
+public:
+question();
+~question();
+}
