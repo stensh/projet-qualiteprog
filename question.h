@@ -8,6 +8,9 @@
 
 class question
 {
+public:
+question();
+~question();
 };
 
 
