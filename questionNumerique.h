@@ -9,10 +9,12 @@
 class questionNumerique: public question
 {
 public:
-    questionNumerique(std::string intitule,std::string texte,int reponse);
+    questionNumerique(std::string intitule,std::string texte,int reponse,int limMin,int limMax);
     int reponse() const ;
+    int limMin() const ;
+    int limMax() const ;
 private:
-    int d_reponse;
+    int d_reponse, d_limMin, d_limMax;
 };
 
 
