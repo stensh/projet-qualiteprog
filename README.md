@@ -18,17 +18,18 @@ On veut pouvoir manipuler trois types de questions :
 
 L'apprentissage se fait par l'affichage consécutif des différents intitulés de questions et leurs réponses.
 
-### Evaluation : 
+### Évaluation : 
 
 L'évaluation se fait à partir d’un questionnaire. 
-Présentation de la question, on lui demande la réponse 
-On affiche la réponse en fonction du type d’évaluation
+Affichage de la question et demande de réponse.
+On affiche la réponse en fonction du type d’évaluation.
 
-A la fin de l’évaluation : affichage des résultats (nb questions, nb d’essais, nb bonnes réponses)
+À la fin de l’évaluation : affichage des résultats (nombre de questions, nombre d’essais, nombre de bonnes réponses)
 
 
-3 types d'évaluations : 
-Test : chaque question est posée dans l’ordre, on n’affiche pas les bonnes réponses
-Seconde chance : une question est reposée une fois si la réponse est mauvaise, et on peut afficher la bonne réponse si la réponse était encore mauvaise 
-Adaptative : les questions sont posées dans un ordre aléatoire et une question avec une mauvaise réponse sera reposée à la fin.
+On veut pouvoir réaliser trois types d'évaluation :
+
+- Évaluation test : chaque question est posée dans l’ordre, on n’affiche pas les bonnes réponses.
+- Évaluation seconde chance : une question est reposée une fois si la réponse est mauvaise, et on peut afficher la bonne réponse si la réponse est une deuxième fois mauvaise.
+- Évaluation adaptative : les questions sont posées dans un ordre aléatoire et une question avec une mauvaise réponse sera reposée à la fin.
 
