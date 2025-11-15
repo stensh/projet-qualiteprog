@@ -13,10 +13,10 @@ class questionChoixMultiples: public question
 {
     public:
         questionChoixMultiples(const std::string& intitule,
-        const std::string& texte, int reponse);  //Ici la reponse stockée est la bonne réponse
-        int reponse() const;
+        const std::string& texte, int reponse);  //Ici la reponse passé en paramètre est le numéro de la bonne réponse.
+        int reponse() const;    //Renvoie le numéro de la réponse.
     private:
-        int d_reponse;  //La bonne réponse de la question
+        int d_reponse;  //Le numéro de la bonne réponse à la question.
 };
 
 
