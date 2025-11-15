@@ -13,7 +13,7 @@ class questionText : public question
     public:
         questionText(const std::string& intitule, std::string texte);
 
-        std::string renvoieReponse() const;
+        std::string reponse() const;
 
     private:
         std::string d_reponse;

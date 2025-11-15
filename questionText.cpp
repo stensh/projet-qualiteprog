@@ -9,7 +9,7 @@ questionText::questionText(const std::string& intitule, const std::string& texte
 {}
 
 
-void questionText::renvoieReponse() const
+void questionText::reponse() const
 {
     return d_reponse;
 }

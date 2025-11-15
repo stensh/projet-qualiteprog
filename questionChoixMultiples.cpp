@@ -7,7 +7,7 @@
 
 questionChoixMultiples::questionChoixMultiples(const std::string& intitule,
     const std::string& texte,
-    int reponse): question{intitule,texte},d_reponse{reponse}
+    int reponse): question{intitule,texte}, d_reponse{reponse}
 {}
 
 int questionChoixMultiples::reponse() const

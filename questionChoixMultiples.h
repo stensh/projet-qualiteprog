@@ -11,12 +11,12 @@
 
 class questionChoixMultiples: public question
 {
-public:
-    questionChoixMultiples(const std::string& intitule,
-        const std::string& texte,int reponse); //Ici la reponse stockée est la bonne réponse
-    int reponse() const;
-private:
-    int d_reponse;//La bonne réponse de la question
+    public:
+        questionChoixMultiples(const std::string& intitule,
+        const std::string& texte, int reponse);  //Ici la reponse stockée est la bonne réponse
+        int reponse() const;
+    private:
+        int d_reponse;  //La bonne réponse de la question
 };
 
 
