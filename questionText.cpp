@@ -9,7 +9,11 @@ questionText::questionText(const std::string& intitule, const std::string& texte
 {}
 
 
-void questionText::reponse() const
+std::string questionText::intitule() const {
+    return d_intitule;
+}
+
+std::string questionText::reponse() const
 {
     return d_reponse;
 }
