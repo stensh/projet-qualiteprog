@@ -15,3 +15,7 @@ int questionChoixMultiples::reponse() const
     return d_reponse;
 }
 
+void questionChoixMultiples::modifierReponse(int reponse)
+{
+    d_reponse = reponse;
+}

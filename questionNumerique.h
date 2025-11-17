@@ -9,12 +9,15 @@
 class questionNumerique: public question
 {
 public:
-    questionNumerique(std::string intitule,std::string texte,int reponse,int limMin,int limMax);
-    int reponse() const ;
-    int limiteMin() const ;
-    int limiteMax() const ;
+    questionNumerique(std::string intitule,std::string texte,int limMin,int limMax);
+
+    int limiteMin() const ;//Renvoie la limite minimal de la réponse
+    void modifierLimiteMin(int limMin);//Modifier la limite maximale
+
+    int limiteMax() const ;//Renvoie la limite maximale de la réponse
+    void modifierLimiteMax(int limMax);//Modifier la limite maximale
 private:
-    int d_reponse, d_limMin, d_limMax;
+    int  d_limMin, d_limMax;
 };
 
 
