@@ -4,16 +4,11 @@
 
 #include "questionText.h"
 
-questionText::questionText(const std::string& intitule, const std::string& texte, const std::string& reponse):
+questionTexte::questionTexte(const std::string& intitule, const std::string& texte, const std::string& reponse):
     question{intitule, texte}, d_reponse{reponse}
 {}
 
-
-std::string questionText::intitule() const {
-    return d_intitule;
-}
-
-std::string questionText::reponse() const
+std::string questionTexte::reponse() const
 {
     return d_reponse;
 }

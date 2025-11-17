@@ -3,66 +3,68 @@
 //
 
 #include "questionnaire.h"
-
 #include <iostream>
 
-using std::cout;
-using std::cin;
+const std::string ENTETE_FICHIER{"CECI EST UN QUESTIONNAIRE"};
 
-const std::string EN_TETE_FICHIER{"CECI EST UN QUESTIONNAIRE"};
-
-questionnaire::questionnaire():
-    d_questionnaire{}
-{}
+questionnaire::questionnaire(std::string& nomQuestionnaire):
+    d_questions{}
+{
+    chargeQuestionnaire(nomQuestionnaire);
+}
 
 std::unique_ptr<questionNumerique> questionnaire::lireQuestionNum(std::ifstream& fichier)
 {
-    std::unique_ptr<questionNumerique> qn;
-    getline(fichier, qn->d_intitule);
-    getline(fichier, qn->d_texte);
-    fichier >> qn->d_limMin >> qn->d_limMax >> qn->d_reponse;
+    std::string intitule, texte;
+    int reponse, limMin, limMax;
+    getline(fichier, intitule);
+    getline(fichier, texte);
+    fichier >> limMin >> limMax >> reponse;
     fichier.ignore();   //"lit" le caractère de fin de ligne
-    return qn;
+    auto qNum{std::make_unique<questionNumerique>(intitule,texte,reponse,limMin,limMax)};
+    return qNum;
 }
 
-std::unique_ptr<questionText> questionnaire::lireQuestionTxt(std::ifstream& fichier)
+std::unique_ptr<questionTexte> questionnaire::lireQuestionTxt(std::ifstream& fichier)
 {
-    std::unique_ptr<questionText> qt;
-    getline(fichier, qt->d_intitule);
-    getline(fichier, qt->d_texte);
-    getline(fichier, qt->d_reponse);
-    return qt;
+    std::string intitule, texte, reponse;
+    getline(fichier, intitule);
+    getline(fichier, texte);
+    getline(fichier, reponse);
+    auto qTXT{std::make_unique<questionTexte>(intitule,texte,reponse)};
+    return qTXT;
 }
 
 std::unique_ptr<questionChoixMultiples> questionnaire::lireQuestionChoixMultiples(std::ifstream& fichier)
 {
-    std::unique_ptr<questionChoixMultiples> qcm;
-    getline(fichier, qcm->d_intitule);
-    std::string txt;
-    getline(fichier, txt);
-    qcm->d_texte = txt;
-    getline(fichier, txt);
-    qcm->d_texte += '\n' + txt;
-    getline(fichier, txt);
-    qcm->d_texte += '\n' + txt;
-    getline(fichier, txt);
-    qcm->d_texte += '\n' + txt;
-    getline(fichier, txt);
-    qcm->d_texte += '\n' + txt;
-    fichier >> qcm->d_reponse;
+    std::string intitule, texte, texteGet;
+    int reponse;
+    getline(fichier, intitule);
+    getline(fichier, texteGet);
+    texte = texteGet;
+    getline(fichier, texteGet);
+    texte += '\n' + texteGet;
+    getline(fichier, texteGet);
+    texte += '\n' + texteGet;
+    getline(fichier, texteGet);
+    texte += '\n' + texteGet;
+    getline(fichier, texteGet);
+    texte += '\n' + texteGet;
+    fichier >> reponse;
     fichier.ignore();
+    auto qcm{std::make_unique<questionChoixMultiples>(intitule,texte,reponse)};
     return qcm;
 }
 
 
-int questionnaire::chargeQuestionnaire()
+int questionnaire::chargeQuestionnaire(const std::string& questionnaire)
 {
-    std::ifstream fichier("questionnaire.txt");
+    std::ifstream fichier(questionnaire);
     if (!fichier.fail())
     {
         std::string lecture;
         std::getline(fichier, lecture);
-        if (lecture == EN_TETE_FICHIER)
+        if (lecture == ENTETE_FICHIER)
         {
             char carac;
             fichier.get(carac);
@@ -74,20 +76,20 @@ int questionnaire::chargeQuestionnaire()
                     if (carac == '\'')
                     {
                         fichier.get(carac); //Lit '\n' après '\''
-                        std::unique_ptr<questionNumerique> qn = lireQuestionNum(fichier);
-                        d_questionnaire.push_back(std::move(qn));
+                        std::unique_ptr<questionNumerique> qNum = lireQuestionNum(fichier);
+                        d_questions.push_back(std::move(qNum));
                     }
                     else if (carac == '<')
                     {
                         fichier.get(carac);//Lit '\n' après '<'
-                        std::unique_ptr<questionText> qtx = lireQuestionTxt(fichier);
-                        d_questionnaire.push_back(std::move(qtx));
+                        std::unique_ptr<questionTexte> qTXT = lireQuestionTxt(fichier);
+                        d_questions.push_back(std::move(qTXT));
                     }
                     else if (carac == '/')
                     {
                         fichier.get(carac);
-                        std::unique_ptr<questionChoixMultiples> qch = lireQuestionChoixMultiples(fichier);
-                        d_questionnaire.push_back(std::move(qch));
+                        std::unique_ptr<questionChoixMultiples> qCM = lireQuestionChoixMultiples(fichier);
+                        d_questions.push_back(std::move(qCM));
                     }
                     else
                     {
@@ -110,4 +112,9 @@ int questionnaire::chargeQuestionnaire()
         return 1;   //Impossible d'ouvrir le fichier ou corrompu
     }
     return 0;
+}
+
+question questionnaire::questionCourante(int indice) const
+{
+    return *d_questions[indice];
 }
