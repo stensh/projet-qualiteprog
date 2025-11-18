@@ -5,7 +5,7 @@
 #include "questionNumerique.h"
 
 //Constructeur
-questionNumerique::questionNumerique(std::string intitule, std::string texte,int limMin,int limMax):
+questionNumerique::questionNumerique(const std::string& intitule,const  std::string& texte,int limMin,int limMax):
         question{intitule,texte}
             ,d_limMin{limMin},d_limMax{limMax}
 {}

@@ -9,9 +9,9 @@
 class questionNumerique: public question
 {
 public:
-    questionNumerique(std::string intitule,std::string texte,int limMin,int limMax);
+    questionNumerique(const std::string& intitule,const std::string& texte,int limMin,int limMax);
 
-    int limiteMin() const ;//Renvoie la limite minimal de la réponse
+    int limiteMin() const ;//Renvoie la limite minimale de la réponse
     void modifierLimiteMin(int limMin);//Modifier la limite maximale
 
     int limiteMax() const ;//Renvoie la limite maximale de la réponse

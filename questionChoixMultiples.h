@@ -13,11 +13,11 @@ class questionChoixMultiples: public question
 {
     public:
         questionChoixMultiples(const std::string& intitule,
-        const std::string& texte, int reponse);  //Ici la reponse passé en paramètre est le numéro de la bonne réponse.
-        int reponse() const;    //Renvoie le numéro de la réponse.
+        const std::string& texte, int bonneReponse);  //Ici la reponse passé en paramètre est le numéro de la bonne réponse.
+        int bonneReponse() const;    //Renvoie le numéro de la réponse.
         void modifierReponse(int reponse); //Dans le cas où on veut pouvoir modifier la reponse
     private:
-        int d_reponse;  //Le numéro de la bonne réponse à la question.
+        int d_bonneReponse;  //Le numéro de la bonne réponse à la question.
 };
 
 

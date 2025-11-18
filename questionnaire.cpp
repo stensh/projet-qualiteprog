@@ -16,12 +16,12 @@ questionnaire::questionnaire(std::string& nomQuestionnaire):
 std::unique_ptr<questionNumerique> questionnaire::lireQuestionNum(std::ifstream& fichier)
 {
     std::string intitule, texte;
-    int reponse, limMin, limMax;
+    int  limMin, limMax;
     getline(fichier, intitule);
     getline(fichier, texte);
-    fichier >> limMin >> limMax >> reponse;
+    fichier >> limMin >> limMax ;
     fichier.ignore();   //"lit" le caractère de fin de ligne
-    auto qNum{std::make_unique<questionNumerique>(intitule,texte,reponse,limMin,limMax)};
+    auto qNum{std::make_unique<questionNumerique>(intitule,texte,limMin,limMax)};
     return qNum;
 }
 

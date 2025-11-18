@@ -7,15 +7,15 @@
 
 questionChoixMultiples::questionChoixMultiples(const std::string& intitule,
     const std::string& texte,
-    int reponse): question{intitule,texte}, d_reponse{reponse}
+    int bonneReponse): question{intitule,texte}, d_bonneReponse{bonneReponse}
 {}
 
-int questionChoixMultiples::reponse() const
+int questionChoixMultiples::bonneReponse()const
 {
-    return d_reponse;
+    return d_bonneReponse;
 }
 
 void questionChoixMultiples::modifierReponse(int reponse)
 {
-    d_reponse = reponse;
+    d_bonneReponse = reponse;
 }
