@@ -1,8 +1,7 @@
-//
-// Created by rquen on 14/11/2025.
-//
+#include "questionTexte.h"
 
-#include "questionText.h"
+namespace sujet
+{
 
 questionTexte::questionTexte(const std::string& intitule, const std::string& texte, const std::string& reponse):
     question{intitule, texte}, d_reponse{reponse}
@@ -13,3 +12,7 @@ std::string questionTexte::reponse() const
     return d_reponse;
 }
 
+bool questionChoixMultiples::reponseJuste(std::string& reponse)const
+{}
+
+}

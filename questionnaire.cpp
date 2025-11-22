@@ -1,11 +1,9 @@
-//
-// Created by rquen on 14/11/2025.
-//
-
 #include "questionnaire.h"
 #include <iostream>
 
-const std::string ENTETE_FICHIER{"CECI EST UN QUESTIONNAIRE"};
+namespace sujet
+{
+
 
 questionnaire::questionnaire(std::string& nomQuestionnaire):
     d_questions{}
@@ -55,7 +53,6 @@ std::unique_ptr<questionChoixMultiples> questionnaire::lireQuestionChoixMultiple
     auto qcm{std::make_unique<questionChoixMultiples>(intitule,texte,reponse)};
     return qcm;
 }
-
 
 int questionnaire::chargeQuestionnaire(const std::string& questionnaire)
 {
@@ -117,4 +114,6 @@ int questionnaire::chargeQuestionnaire(const std::string& questionnaire)
 question questionnaire::questionCourante(int indice) const
 {
     return *d_questions[indice];
+}
+
 }

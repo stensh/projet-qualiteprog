@@ -1,11 +1,11 @@
-//
-// Created by rquen on 14/11/2025.
-//
-
 #ifndef PROJET_QUALITEPROG_QUESTIONTEXT_H
 #define PROJET_QUALITEPROG_QUESTIONTEXT_H
 
 #include "question.h"
+#include "questionChoixMultiples.h"
+
+namespace sujet
+{
 
 class questionTexte : public question
 {
@@ -13,11 +13,12 @@ class questionTexte : public question
         questionTexte(const std::string& intitule, const std::string& texte, const std::string& reponse);
 
         std::string reponse() const;    //Renvoie la bonne réponse.
+        bool questionChoixMultiples::reponseJuste(std::string& reponse)const override;
 
     private:
         std::string d_reponse;
 
 };
 
-
+}
 #endif //PROJET_QUALITEPROG_QUESTIONTEXT_H
