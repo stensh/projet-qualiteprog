@@ -1,5 +1,6 @@
 #ifndef PROJET_QUALITEPROG_REPONSE_H
 #define PROJET_QUALITEPROG_REPONSE_H
+
 #include <string>
 
 namespace test

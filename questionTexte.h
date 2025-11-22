@@ -2,7 +2,6 @@
 #define PROJET_QUALITEPROG_QUESTIONTEXT_H
 
 #include "question.h"
-#include "questionChoixMultiples.h"
 
 namespace sujet
 {

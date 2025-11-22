@@ -5,9 +5,7 @@
 #include <vector>
 #include <fstream>
 #include "question.h"
-#include "questionTexte.h"
-#include "questionNumerique.h"
-#include "questionChoixMultiples.h"
+
 
 namespace sujet
 {
@@ -15,25 +13,20 @@ namespace sujet
 class questionnaire
 {
     public:
-        questionnaire(std::string& nomQuestionnaire);
+        questionnaire(std::string& nomFichier);
         ~questionnaire();
-
-        int chargeQuestionnaire(const std::string& questionnaire);  //0 si le fichier a été lu
-        //1 si le fichier n'a pu être ouvert
-        //2 si le fichier n'est pas un fichier questionnaire
-        //3 si une erreur est survenu lors de la lecture du fichier
 
 
         question& questionCourante(int indice) const;    //Renvoie la question demandée indice.
 
+        void ajouteQuestion(std::unique_ptr<question>& q);
+        std::string nomFichier() const;
+
     private:
         std::vector<std::unique_ptr<question>> d_questions; //Stock les différentes question du questionnaire
+        std::string d_nomFichier;
 
-        std::unique_ptr<questionNumerique> lireQuestionNum(std::ifstream& fichier);
-        std::unique_ptr<questionTexte> lireQuestionTxt(std::ifstream& fichier);
-        std::unique_ptr<questionChoixMultiples> lireQuestionChoixMultiples(std::ifstream& fichier);
 
-        const std::string ENTETE_FICHIER{"CECI EST UN QUESTIONNAIRE"};
 };
 
 }
