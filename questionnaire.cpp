@@ -59,32 +59,27 @@ int questionnaire::chargeQuestionnaire(const std::string& questionnaire)
     std::ifstream fichier(questionnaire);
     if (!fichier.fail())
     {
-        std::string lecture;
-        std::getline(fichier, lecture);
-        if (lecture == ENTETE_FICHIER)
+        std::string balise;
+        std::getline(fichier, balise);
+        if (balise == ENTETE_FICHIER)
         {
-            char carac;
-            fichier.get(carac);
-            if (carac == '{')
+            getline(fichier, balise);
+            if (balise == "{")
             {
-                fichier.get(carac); // Lit le premier '\n'
-                while (fichier.get(carac) && carac != '}')
+                while (getline(fichier, balise) && balise != "}")
                 {
-                    if (carac == '\'')
+                    if (balise == "[QN]")
                     {
-                        fichier.get(carac); //Lit '\n' après '\''
                         std::unique_ptr<questionNumerique> qNum = lireQuestionNum(fichier);
                         d_questions.push_back(std::move(qNum));
                     }
-                    else if (carac == '<')
+                    else if (balise == "[QT]")
                     {
-                        fichier.get(carac);//Lit '\n' après '<'
                         std::unique_ptr<questionTexte> qTXT = lireQuestionTxt(fichier);
                         d_questions.push_back(std::move(qTXT));
                     }
-                    else if (carac == '/')
+                    else if (balise == "[QCM]")
                     {
-                        fichier.get(carac);
                         std::unique_ptr<questionChoixMultiples> qCM = lireQuestionChoixMultiples(fichier);
                         d_questions.push_back(std::move(qCM));
                     }
