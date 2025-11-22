@@ -17,5 +17,7 @@ int questionNumerique::limiteMax()const
     return d_limMax;
 }
 bool questionNumerique::reponseJuste(std::string& reponse)const
-{}
+{   int reponseInt= std::stoi(reponse);
+    return reponseInt>= limiteMin() && reponseInt<= limiteMax();
+}
 }

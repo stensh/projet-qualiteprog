@@ -12,7 +12,9 @@ std::string questionTexte::reponse() const
     return d_reponse;
 }
 
-bool questionTexte::reponseJuste(std::string& reponse) const
-{}
+bool questionTexte::reponseJuste(std::string& rep) const
+{
+    return reponse() == rep;
+}
 
 }
