@@ -24,7 +24,7 @@ class questionnaire
         //3 si une erreur est survenu lors de la lecture du fichier
 
 
-        question questionCourante(int indice) const;    //Renvoie la question demandée indice.
+        question& questionCourante(int indice) const;    //Renvoie la question demandée indice.
 
     private:
         std::vector<std::unique_ptr<question>> d_questions; //Stock les différentes question du questionnaire

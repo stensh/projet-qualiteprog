@@ -12,7 +12,7 @@ std::string questionTexte::reponse() const
     return d_reponse;
 }
 
-bool questionChoixMultiples::reponseJuste(std::string& reponse)const
+bool questionTexte::reponseJuste(std::string& reponse) const
 {}
 
 }

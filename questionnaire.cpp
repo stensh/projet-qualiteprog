@@ -111,7 +111,7 @@ int questionnaire::chargeQuestionnaire(const std::string& questionnaire)
     return 0;
 }
 
-question questionnaire::questionCourante(int indice) const
+question& questionnaire::questionCourante(int indice) const
 {
     return *d_questions[indice];
 }
