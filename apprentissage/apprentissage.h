@@ -3,6 +3,8 @@
 
 namespace revision {
     class apprentissage {
+        public:
+            void commencer(const questionnaire &quest);
     };
 }
 
