@@ -14,7 +14,6 @@ namespace test
     {
     public:
         evaluationSecondeChance();
-        void commencer(const int /*Questionnaire&*/ q) const override;
         bool afficherBonneReponse() const override;
     private:
         bool d_secondeChance, d_nbEssais; // booléen pour indiquer si la seconde chance a été utilisée ou pas

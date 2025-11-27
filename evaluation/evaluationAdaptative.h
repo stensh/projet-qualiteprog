@@ -12,7 +12,6 @@ namespace test
     {
     public:
         evaluationAdaptative();
-        void commencer(const int /*Questionnaire&*/ q) const override;
     private:
         int d_nbEssais;
     };

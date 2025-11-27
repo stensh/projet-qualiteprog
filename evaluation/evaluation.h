@@ -11,9 +11,8 @@ namespace test
     public:
         evaluation();
         virtual ~evaluation() = default;
-        virtual void commencer(const questionnaire& quest) const = 0;
+        question questionCourante() const; // à définir
         virtual bool resteQuestions() const = 0;
-        virtual question questionCourante() const = 0;
         virtual bool afficherBonneReponse() const = 0;
         virtual void questionSuivante() const = 0;
         virtual void afficherResultats() const = 0;

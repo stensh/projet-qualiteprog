@@ -13,9 +13,7 @@ namespace test
     {
     public:
         evaluationTest();
-        void commencer(const int /*Questionnaire&*/ q) const override;
         bool resteQuestions() const override;
-        int /*plutôt Question*/ & questionCourante() override;
         void questionSuivante() override;
         void afficherResultats();
     };
