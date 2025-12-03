@@ -15,7 +15,7 @@ namespace test
         virtual bool resteQuestions() const = 0;
         virtual bool afficherBonneReponse() const = 0;
         virtual void questionSuivante() const = 0;
-        virtual void afficherResultats() const = 0;
+        virtual double resultats() const = 0;
     private:
         int d_nbBonnesReponses;
     };
