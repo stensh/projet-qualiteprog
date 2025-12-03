@@ -15,5 +15,7 @@ namespace test
     d_index ++;
   }
   
-  void afficherResultats();
+  double resultats() const
+{
+    return d_nbBonnesReponses * 1.0;
 } // test
