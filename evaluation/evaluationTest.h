@@ -15,7 +15,7 @@ namespace test
         evaluationTest();
         bool resteQuestions() const override;
         void questionSuivante() override;
-        void afficherResultats();
+        double resultats() override;
     };
 } // test
 
