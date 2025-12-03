@@ -14,6 +14,7 @@ namespace test
     public:
         evaluationTest();
         bool resteQuestions() const override;
+        bool afficherBonneReponse() const override;
         void questionSuivante() override;
         double resultats() const override;
     };
