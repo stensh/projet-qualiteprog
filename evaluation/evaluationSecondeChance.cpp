@@ -6,8 +6,16 @@ namespace test
 
 
 
-  double resultats() const
-{
-  
-}
+    double evaluationSecondeChance::resultats() const
+    {
+
+    }
+
+    void evaluationSecondeChance::questionSuivante()
+    {
+        if (d_secondeChance)
+        {
+            d_reposees.push_back();
+        }
+    }
 } // test
