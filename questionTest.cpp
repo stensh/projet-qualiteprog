@@ -49,7 +49,6 @@ TEST_CASE("La question choix multiples est bien construite")
 }
 
 //Questions texte
-
 TEST_CASE("La question texte est bien construite")
 {
     std::string intitule{"intitule"}, texte{"texte"},reponse{"reponse"};
