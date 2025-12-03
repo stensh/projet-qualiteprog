@@ -12,6 +12,7 @@ namespace test
     {
     public:
         evaluationAdaptative();
+        double resultats() const override;
     private:
         int d_nbEssais;
     };
