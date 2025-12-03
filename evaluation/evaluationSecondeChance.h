@@ -15,6 +15,7 @@ namespace test
     public:
         evaluationSecondeChance();
         bool afficherBonneReponse() const override;
+        double resultats() const override;
     private:
         bool d_secondeChance, d_nbEssais; // booléen pour indiquer si la seconde chance a été utilisée ou pas
     };
