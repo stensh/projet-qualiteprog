@@ -4,18 +4,22 @@ namespace test
 {
     evaluationTest::evaluationTest();
 
+    bool evaluationTest::afficherBonneReponse() const
+    {
+        return false;
+    }
 
-  bool resteQuestions() const override
+  bool evaluationTest::resteQuestions() const override
   {
     return d_index<static_cast<int>(d_questionsRestante.size());
   }
 
-  void questionSuivante() override
+  void evaluationTest::questionSuivante() override
   {
     d_index ++;
   }
   
-  double resultats() const
+  double evaluationTest::resultats() const
 {
     return d_nbBonnesReponses * 1.0;
 } // test
