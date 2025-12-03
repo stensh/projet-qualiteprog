@@ -7,12 +7,12 @@ questionChoixMultiples::questionChoixMultiples(const std::string& intitule, cons
     question{intitule,texte}, d_bonneReponse{bonneReponse}
 {}
 
-int questionChoixMultiples::reponse() const
+std::string questionChoixMultiples::reponse() const
 {
-    return d_bonneReponse;
+    return std::to_string(d_bonneReponse);
 }
 
-bool questionChoixMultiples::reponseJuste(std::string& rep)const
+bool questionChoixMultiples::reponseJuste(const std::string& rep)const
 {
     int reponseInt = std::stoi(rep);
     return reponseInt == reponse();
