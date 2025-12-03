@@ -15,7 +15,7 @@ std::string questionChoixMultiples::reponse() const
 bool questionChoixMultiples::reponseJuste(const std::string& rep)const
 {
     int reponseInt = std::stoi(rep);
-    return reponseInt == reponse();
+    return reponseInt == d_bonneReponse;
 }
 
 }

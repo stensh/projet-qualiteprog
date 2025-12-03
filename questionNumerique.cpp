@@ -24,6 +24,6 @@ std::string questionNumerique::reponse() const
 
 bool questionNumerique::reponseJuste(const std::string& reponse)const
 {   int reponseInt= std::stoi(reponse);
-    return reponseInt>= limiteMin() && reponseInt<= limiteMax();
+    return reponseInt >= limiteMin() && reponseInt <= limiteMax();
 }
 }
