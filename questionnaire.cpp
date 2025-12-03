@@ -9,6 +9,9 @@ questionnaire::questionnaire(std::string& nomFichier):
     d_questions{}, d_nomFichier{nomFichier}
 {}
 
+questionnaire::~questionnaire()
+{}
+
 question& questionnaire::questionCourante(int indice) const
 {
     return *d_questions[indice];

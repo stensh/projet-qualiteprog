@@ -4,6 +4,11 @@
 namespace sujet
 {
 
+gestionnaireQuestionnaire::gestionnaireQuestionnaire()
+{}
+
+gestionnaireQuestionnaire::~gestionnaireQuestionnaire()
+{}
 
 
 std::unique_ptr<questionNumerique> gestionnaireQuestionnaire::lireQuestionNum(std::ifstream& fichier)
