@@ -8,8 +8,8 @@
 void questionBienConstruite(const sujet::question& q,const std::string& intitule,
                             const std::string& texte)
 {
-    REQUIRE((q.intitule()== intitule));
-    REQUIRE((q.texte()== texte));
+    REQUIRE_EQ(q.intitule(),intitule);
+    REQUIRE_EQ(q.texte(),texte);
 }
 
 //Question Numérique
@@ -24,9 +24,10 @@ TEST_CASE("La question numérique est bien construite")
     }
    SUBCASE("Les données de la classe question numérique sont bien assignées")
     {
-        REQUIRE((q.limiteMin()== min));
-        REQUIRE((q.limiteMax()== max));
+        REQUIRE_EQ(q.limiteMin(),min);
+        REQUIRE_EQ(q.limiteMax(),max);
         REQUIRE((q.reponseJuste(std::to_string(min))));
+        REQUIRE((q.reponseJuste(std::to_string(min+1))));
         REQUIRE((q.reponseJuste(std::to_string(max))));
     }
 }
@@ -43,8 +44,8 @@ TEST_CASE("La question choix multiples est bien construite")
     }
     SUBCASE("Les données de la classe question à choix multiples")
     {
-        REQUIRE((std::stoi(q.reponse()) == reponse));
-        REQUIRE((q.reponseJuste(std::to_string(reponse))));
+        REQUIRE_EQ(std::stoi(q.reponse()),reponse);
+        REQUIRE(q.reponseJuste(std::to_string(reponse)));
     }
 }
 
@@ -60,7 +61,7 @@ TEST_CASE("La question texte est bien construite")
     }
     SUBCASE("Les données de la classe question à choix multiples")
     {
-        REQUIRE((q.reponse() == reponse));
+        REQUIRE_EQ(q.reponse(), reponse);
         REQUIRE(q.reponseJuste(reponse));
     }
 }
