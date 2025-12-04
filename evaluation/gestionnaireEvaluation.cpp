@@ -1,4 +1,6 @@
+#include <iostream>
 #include "gestionnaireEvaluation.h"
+#include "questionnaire/reponse.h"
 
 namespace test {
     gestionnaireEvaluation::gestionnaireEvaluation()
@@ -7,7 +9,7 @@ namespace test {
     gestionnaireEvaluation::~gestionnaireEvaluation()
     {}
 
-    void gestionnaireEvaluation::commencerEvaluation(questionnaire* quest, std::unique_ptr<evaluation>& eval)
+    void gestionnaireEvaluation::commencerEvaluation(questionnaire* quest, std::unique_ptr<evaluation>& eval) const
     {
         while (eval->resteQuestions())
         {

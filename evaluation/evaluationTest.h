@@ -12,12 +12,12 @@ namespace test
     class evaluationTest : public evaluation
     {
     public:
-        evaluationTest();
+        evaluationTest(const sujet::questionnaire& q);
         bool resteQuestions() const override;
         bool afficherBonneReponse() const override;
         void questionSuivante() override;
         double resultats() const override;
     };
-} // test
+}
 
 #endif //PROJET_QUALITEPROG_EVALUATIONTEST_H

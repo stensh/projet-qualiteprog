@@ -9,9 +9,14 @@ questionnaire::questionnaire(std::string& nomFichier):
     d_questions{}, d_nomFichier{nomFichier}
 {}
 
-question& questionnaire::questionCourante(int indice) const
+std::unique_ptr<question> questionnaire::questionCourante(int indice) const
 {
-    return *d_questions[indice];
+    return d_questions[indice];
+}
+
+int questionnaire::taille() const
+{
+    return d_questions.size();
 }
 
 void questionnaire::ajouteQuestion(std::unique_ptr<question> &q)

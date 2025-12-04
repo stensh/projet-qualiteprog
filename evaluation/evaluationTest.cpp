@@ -2,24 +2,28 @@
 
 namespace test
 {
-    evaluationTest::evaluationTest();
+    evaluationTest::evaluationTest(const sujet::questionnaire& q)
+        : evaluation{q}
+    {}
 
     bool evaluationTest::afficherBonneReponse() const
     {
         return false;
     }
 
-  bool evaluationTest::resteQuestions() const override
-  {
-    return d_index<static_cast<int>(d_questionsRestante.size());
-  }
+    bool evaluationTest::resteQuestions() const
+    {
+        return nbQuestions() - indiceCourant() > 0;
+    }
 
-  void evaluationTest::questionSuivante() override
-  {
-    d_index ++;
-  }
-  
-  double evaluationTest::resultats() const
-{
-    return d_nbBonnesReponses * 1.0;
-} // test
+    void evaluationTest::questionSuivante()
+    {
+        incrementeIndiceCourant();
+        incrementeQuestionsPosees(); // à faire au moment de poser la question, gestionnaireEvaluation ?
+    }
+
+    double evaluationTest::resultats() const
+    {
+        return bonnesReponses() * 20 / questionsPosees(); // note sur 20
+    }
+}
