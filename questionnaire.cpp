@@ -17,7 +17,7 @@ question& questionnaire::questionCourante(int indice) const
     return *d_questions[indice];
 }
 
-void questionnaire::ajouteQuestion(std::unique_ptr<question> &q)
+void questionnaire::ajouteQuestion(std::unique_ptr<question> q)
 {
     d_questions.push_back(std::move(q));
 }
