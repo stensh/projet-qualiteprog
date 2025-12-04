@@ -48,56 +48,62 @@ std::unique_ptr<questionChoixMultiples> gestionnaireQuestionnaire::lireQuestionC
     return std::make_unique<questionChoixMultiples>(intitule,texte,reponse);
 }
 
+bool gestionnaireQuestionnaire::valideEntete(std::ifstream &fichier)
+{
+    std::string balise;
+    std::getline(fichier, balise);
+    if (balise != ENTETE_FICHIER)
+    {
+        return false;
+    }
+    std::getline(fichier, balise);
+    return balise=="{";
+}
+
+int gestionnaireQuestionnaire::analyseQuestions(questionnaire *ques, std::ifstream &fichier)
+{
+    std::string balise;
+    while (std::getline(fichier,balise) and balise!="}")
+    {
+        auto question = creeQuestion(balise, fichier);
+        if (question==nullptr)
+        {
+            return 3;
+        }
+        ques->ajouteQuestion(std::move(question));
+    }
+    return 0;
+}
+
+std::unique_ptr<question> gestionnaireQuestionnaire::creeQuestion(const std::string& balise, std::ifstream &fichier)
+{
+    if (balise=="[QN]")
+    {
+        return lireQuestionNum(fichier);
+    }
+    else if (balise=="[QT]")
+    {
+        return lireQuestionTxt(fichier);
+    }
+    else if (balise=="[QCM]")
+    {
+        return lireQuestionChoixMultiples(fichier);
+    }
+    return nullptr;
+}
+
 int gestionnaireQuestionnaire::chargeQuestionnaire(questionnaire* quest)
 {
     std::ifstream fichier(quest->nomFichier());
-    if (!fichier.fail())
+    if (!fichier)
     {
-        std::string balise;
-        std::getline(fichier, balise);
-        if (balise == ENTETE_FICHIER)
-        {
-            getline(fichier, balise);
-            if (balise == "{")
-            {
-                while (getline(fichier, balise) && balise != "}")
-                {
-                    if (balise == "[QN]")
-                    {
-                        std::unique_ptr<question> qNum = lireQuestionNum(fichier);
-                        quest->ajouteQuestion(qNum);
-                    }
-                    else if (balise == "[QT]")
-                    {
-                        std::unique_ptr<question> qTXT = lireQuestionTxt(fichier);
-                        quest->ajouteQuestion(qTXT);
-                    }
-                    else if (balise == "[QCM]")
-                    {
-                        std::unique_ptr<question> qCM = lireQuestionChoixMultiples(fichier);
-                        quest->ajouteQuestion(qCM);
-                    }
-                    else
-                    {
-                        return 3;   //Problème lecture fichier
-                    }
-                }
-            }
-            else
-            {
-                return 3;   //Problème lecture fichier
-            }
-        }
-        else
-        {
-            return 2;   //Pas un fichier questionnaire
-        }
+        return 1;
     }
-    else
+    if (!valideEntete(fichier))
     {
-        return 1;   //Impossible d'ouvrir le fichier ou corrompu
+        return 2;
     }
-    return 0;
+    return analyseQuestions(quest, fichier);
 }
 
 
