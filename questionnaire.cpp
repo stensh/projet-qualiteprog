@@ -26,6 +26,10 @@ std::string questionnaire::nomFichier() const
 {
     return d_nomFichier;
 }
+int questionnaire::nombreQuestions() const
+{
+    return d_questions.size();
+}
 
 
 

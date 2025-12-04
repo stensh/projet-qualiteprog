@@ -21,9 +21,10 @@ class questionnaire
 
         void ajouteQuestion(std::unique_ptr<question>& q);
         std::string nomFichier() const;
+        int nombreQuestions() const;
 
     private:
-        std::vector<std::unique_ptr<question>> d_questions; //Stock les différentes question du questionnaire
+        std::vector<std::unique_ptr<question>> d_questions; //Stock les différentes questions du questionnaire
         std::string d_nomFichier;
 
 
