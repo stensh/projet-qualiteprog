@@ -19,7 +19,7 @@ class questionnaire
 
         question& questionCourante(int indice) const;    //Renvoie la question demandée indice.
 
-        void ajouteQuestion(std::unique_ptr<question>& q);
+        void ajouteQuestion(std::unique_ptr<question> q);
         std::string nomFichier() const;
         int nombreQuestions() const;
 
