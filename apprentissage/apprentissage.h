@@ -1,10 +1,16 @@
 #ifndef PROJET_QUALITEPROG_APPRENTISSAGE_H
 #define PROJET_QUALITEPROG_APPRENTISSAGE_H
 
-namespace revision {
-    class apprentissage {
-        public:
-            void commencer(const questionnaire &quest);
+#include "questionnaire/questionnaire.h"
+
+namespace revision
+{
+    class apprentissage
+    {
+    public:
+        apprentissage() = default;
+        ~apprentissage() = default;
+        void commencer(const sujet::questionnaire &quest);
     };
 }
 

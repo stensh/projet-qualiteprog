@@ -19,11 +19,11 @@ namespace test
     void evaluationTest::questionSuivante()
     {
         incrementeIndiceCourant();
-        incrementeQuestionsPosees(); // à faire au moment de poser la question, gestionnaireEvaluation ?
+        incrementeQuestionsPosees();
     }
 
     double evaluationTest::resultats() const
     {
-        return bonnesReponses() * 20 / questionsPosees(); // note sur 20
+        return bonnesReponses() * 20 / questionsPosees();
     }
 }

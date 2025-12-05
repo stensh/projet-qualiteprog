@@ -9,6 +9,7 @@ namespace test {
     gestionnaireEvaluation::~gestionnaireEvaluation()
     {}
 
+    // TODO séparer la fonction en plusieurs petites
     void gestionnaireEvaluation::commencerEvaluation(std::unique_ptr<evaluation>& eval) const
     {
         while (eval->resteQuestions())

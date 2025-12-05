@@ -1,4 +1,10 @@
 #include "apprentissage.h"
 
-namespace revision {
+namespace revision
+{
+    void apprentissage::commencer(const sujet::questionnaire &quest)
+    {
+
+    }
+
 }

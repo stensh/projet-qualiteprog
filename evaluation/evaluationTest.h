@@ -3,10 +3,6 @@
 
 #include "evaluation.h"
 
-/**
-* Chaque question est posée dans l'ordre, sans afficher les bonnes réponses
-*/
-
 namespace test
 {
     class evaluationTest : public evaluation

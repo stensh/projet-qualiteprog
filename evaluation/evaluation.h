@@ -10,7 +10,7 @@ namespace test
     {
     public:
         // Constructeur et desctructeur virtuel
-        evaluation(const sujet::questionnaire& q); // revoir l'initialisation (lien avec questionnaire)
+        evaluation(const sujet::questionnaire& q);
         virtual ~evaluation() = default;
 
         // Accesseurs
@@ -29,10 +29,10 @@ namespace test
         virtual bool resteQuestions() const = 0;
         virtual bool afficherBonneReponse() const = 0;
         virtual void questionSuivante() = 0;
-        virtual double resultats() const = 0;
+        virtual double resultats() const = 0; // Donne la note sur 20
     private:
         int d_indiceCourant, d_nbBonnesReponses, d_nbQuestionsPosees; // calculé ?
-        const sujet::questionnaire& d_questionnaire; // on utilise une référence constante
+        const sujet::questionnaire& d_questionnaire; // On utilise une référence constante
     };
 }
 
