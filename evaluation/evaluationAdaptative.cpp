@@ -16,10 +16,16 @@ namespace test
             d_ordreQuestions.push_back(i);
         }
 
-        std::random_device rd;
-        std::mt19937 g(rd());
-        std::shuffle(d_ordreQuestions.begin(), d_ordreQuestions.end(), g);
-        // TODO est-ce que le mélange est vraiment aléatoire à chaque itération ?
+        unsigned seed = std::chrono::system_clock::now().time_since_epoch().count(); // heure actuelle convertie en nombre
+        std::shuffle(d_ordreQuestions.begin(), d_ordreQuestions.end(),
+                     std::default_random_engine(seed));
+        // On utilise un seed basé sur le temps pour que le mélange soit aléatoire
+    }
+
+    const std::unique_ptr<sujet::question> &evaluationAdaptative::questionCourante() const
+    {
+        int indiceReel{d_ordreQuestions[d_positionOrdre]}; // retrouve l'indice réel de la question
+        return questionnaire().questionIndice(indiceReel);
     }
 
     bool evaluationAdaptative::resteQuestions() const
@@ -39,19 +45,16 @@ namespace test
         ++d_positionOrdre;
     }
 
-    double evaluationAdaptative::resultats() const
+    double evaluationAdaptative::resultats() const // TODO mettre ça dans une fonction commune non ?
     {
         if (d_nbEssais == 0) return 0.0;
-        return bonnesReponses() * 20 / d_nbEssais;
+        return bonnesReponses() * 20.0 / d_nbEssais;
     }
 
 
     void evaluationAdaptative::marquerEchec()
     {
-        if (d_positionOrdre < d_ordreQuestions.size())
-        {
-            d_ordreQuestions.push_back(d_ordreQuestions[d_positionOrdre]);
-        }
+        d_ordreQuestions.push_back(d_ordreQuestions[d_positionOrdre]);
     }
 
 }

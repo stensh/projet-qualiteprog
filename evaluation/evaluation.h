@@ -14,7 +14,6 @@ namespace test
         virtual ~evaluation() = default;
 
         // Accesseurs
-        int indiceCourant() const;
         int bonnesReponses() const;
         int nbQuestions() const;
         int questionsPosees() const;
@@ -22,16 +21,18 @@ namespace test
         // Modifieurs
         void incrementeBonnesReponses();
         void incrementeQuestionsPosees();
-        void incrementeIndiceCourant();
-        const std::unique_ptr<sujet::question>& questionCourante() const;
 
         // Méthodes virtuelles pures
+        virtual const std::unique_ptr<sujet::question>& questionCourante() const = 0;
+            // virtuelle car on change l'approche de question courante pour chaque type d'évaluation
         virtual bool resteQuestions() const = 0;
         virtual bool afficherBonneReponse() const = 0;
         virtual void questionSuivante() = 0;
         virtual double resultats() const = 0; // Donne la note sur 20
+    protected:
+        const sujet::questionnaire& questionnaire() const; // accès protégé au questionnaire pour les sous-classes
     private:
-        int d_indiceCourant, d_nbBonnesReponses, d_nbQuestionsPosees; // calculé ?
+        int d_nbBonnesReponses, d_nbQuestionsPosees;
         const sujet::questionnaire& d_questionnaire; // On utilise une référence constante
     };
 }

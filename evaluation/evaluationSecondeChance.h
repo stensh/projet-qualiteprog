@@ -20,19 +20,19 @@ namespace test
         evaluationSecondeChance(const sujet::questionnaire& q);
 
         // Méthodes surchargées
+        const std::unique_ptr<sujet::question>& questionCourante() const override;
         bool resteQuestions() const override;
         bool afficherBonneReponse() const override; // Affichage au bout du deuxième échec
         void questionSuivante() override;
         double resultats() const override;
 
         // Méthodes propres à la classe
+        void marquerReussite(int indice);
         void marquerEchec(int indice);
     private:
-        int d_indiceListe; // position actuelle dans la liste des questions (même chose que d_indiceCourant dans question.h ?)
-        bool d_secondeChance, d_nbEssais; // booléen pour indiquer si la seconde chance a été utilisée ou pas
-        std::vector<std::unique_ptr<sujet::question>> d_reposees;
-        std::map<int, int> d_tentativesQuestion; // Nombre de tentatives par question
-        // TODO revoir le type du map (question est une classe abstraite)
+        int d_positionCourante; // Position actuelle dans le tableau d'indices
+        std::vector<int> d_toutesLesQuestions; // Indices de toutes les questions (du questionnaire et reposées)
+        std::map<int, int> d_nbEssais; // Clé entre l'indice de la question et le nombre d'essais
     };
 }
 
