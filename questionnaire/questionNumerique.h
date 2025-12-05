@@ -2,7 +2,7 @@
 #define PROJET_QUALITEPROG_QUESTIONNUMERIQUE_H
 
 #include <string>
-#include "question.h"
+#include "questionnaire/question.h"
 
 namespace sujet
 {
@@ -14,7 +14,8 @@ class questionNumerique: public question
 
         int limiteMin() const ;//Renvoie la limite minimale de la réponse
         int limiteMax() const ;//Renvoie la limite maximale de la réponse
-        bool reponseJuste(std::string& reponse) const override;
+        std::string reponse() const override;
+        bool reponseJuste(const std::string& reponse) const override;
 
     private:
         int  d_limMin, d_limMax;

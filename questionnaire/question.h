@@ -16,7 +16,9 @@ class question
         std::string intitule() const;
         std::string texte() const;
 
-        virtual bool reponseJuste(std::string& reponse) const = 0;
+        virtual std::string reponse() const = 0;
+
+        virtual bool reponseJuste(const std::string& reponse) const = 0;
 
     private:
         std::string d_intitule;

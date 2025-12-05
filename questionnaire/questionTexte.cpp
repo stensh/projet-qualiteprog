@@ -1,4 +1,4 @@
-#include "questionTexte.h"
+#include "questionnaire/questionTexte.h"
 
 namespace sujet
 {
@@ -12,7 +12,7 @@ std::string questionTexte::reponse() const
     return d_reponse;
 }
 
-bool questionTexte::reponseJuste(std::string& rep) const
+bool questionTexte::reponseJuste(const std::string& rep) const
 {
     return reponse() == rep;
 }

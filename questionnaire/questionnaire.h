@@ -4,26 +4,27 @@
 #include <memory>
 #include <vector>
 #include <fstream>
-#include "question.h"
+#include "questionnaire/question.h"
 
 
 namespace sujet
 {
+
     class questionnaire
     {
     public:
-        // Constructeur et desctructeur
-        questionnaire(std::string& nomFichier);
-        ~questionnaire() = default;
+        //Constructeur et destructeur
+        questionnaire(const std::string& nomFichier);
+        ~questionnaire() = default ;
 
-        // Méthodes de la classe
+        //Méthode de la classe
         void ajouteQuestion(std::unique_ptr<question> q);
-        const std::unique_ptr<question>& questionIndice(int indice) const; // référence constante pour accès en lecture
+        const std::unique_ptr<question>& questionIndice(int indice) const;    //Renvoie la question demandée indice.
         std::string nomFichier() const;
         int taille() const;
 
     private:
-        std::vector<std::unique_ptr<question>> d_questions; //Stock les différentes question du questionnaire
+        std::vector<std::unique_ptr<question>> d_questions; //Stock les différentes questions du questionnaire
         std::string d_nomFichier;
     };
 }

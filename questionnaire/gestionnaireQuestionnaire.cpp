@@ -17,7 +17,7 @@ std::unique_ptr<questionNumerique> gestionnaireQuestionnaire::lireQuestionNum(st
     return std::make_unique<questionNumerique>(intitule,texte,limMin,limMax);
 }
 
-std::unique_ptr<questionTexte> gestionnaireQuestionnaire::lireQuestionTxt(std::ifstream& fichier)
+std::unique_ptr<questionTexte> gestionnaireQuestionnaire::lireQuestionTxt(std::istream& fichier)
 {
     std::string intitule, texte, reponse;
     getline(fichier, intitule);
@@ -26,13 +26,13 @@ std::unique_ptr<questionTexte> gestionnaireQuestionnaire::lireQuestionTxt(std::i
     return std::make_unique<questionTexte>(intitule,texte,reponse);
 }
 
-std::unique_ptr<questionChoixMultiples> gestionnaireQuestionnaire::lireQuestionChoixMultiples(std::ifstream& fichier)
+std::unique_ptr<questionChoixMultiples> gestionnaireQuestionnaire::lireQuestionChoixMultiples(std::istream& fichier)
 {
-    std::string intitule, texte, texteGet;
+    std::string intitule, texteGet;
     int reponse;
     getline(fichier, intitule);
     getline(fichier, texteGet);
-    texte = texteGet;
+    std::string texte = texteGet;
     for (int i{0}; i<4; ++i)
     {
         getline(fichier, texteGet);
@@ -43,56 +43,71 @@ std::unique_ptr<questionChoixMultiples> gestionnaireQuestionnaire::lireQuestionC
     return std::make_unique<questionChoixMultiples>(intitule,texte,reponse);
 }
 
-int gestionnaireQuestionnaire::chargeQuestionnaire(questionnaire* quest)
+bool gestionnaireQuestionnaire::valideEntete(std::istream &fichier)
 {
-    std::ifstream fichier(quest->nomFichier());
-    if (!fichier.fail())
+    std::string balise;
+    std::getline(fichier, balise);
+    if (balise != ENTETE_FICHIER)
     {
-        std::string balise;
-        std::getline(fichier, balise);
-        if (balise == ENTETE_FICHIER)
+        return false;
+    }
+    std::getline(fichier, balise);
+    return balise=="{";
+}
+
+void gestionnaireQuestionnaire::analyseQuestions(questionnaire &ques, std::istream &fichier, int &code)
+{
+    std::string balise;
+    while (std::getline(fichier,balise) and balise!="}")    //A demander au prof.
+    {
+        auto question = creeQuestion(balise, fichier);
+        if (question!=nullptr)
         {
-            getline(fichier, balise);
-            if (balise == "{")
-            {
-                while (getline(fichier, balise) && balise != "}")
-                {
-                    if (balise == "[QN]")
-                    {
-                        std::unique_ptr<question> qNum = lireQuestionNum(fichier);
-                        quest->ajouteQuestion(qNum);
-                    }
-                    else if (balise == "[QT]")
-                    {
-                        std::unique_ptr<question> qTXT = lireQuestionTxt(fichier);
-                        quest->ajouteQuestion(qTXT);
-                    }
-                    else if (balise == "[QCM]")
-                    {
-                        std::unique_ptr<question> qCM = lireQuestionChoixMultiples(fichier);
-                        quest->ajouteQuestion(qCM);
-                    }
-                    else
-                    {
-                        return 3;   //Problème lecture fichier
-                    }
-                }
-            }
-            else
-            {
-                return 3;   //Problème lecture fichier
-            }
+            ques.ajouteQuestion(std::move(question));
         }
         else
         {
-            return 2;   //Pas un fichier questionnaire
+            break;
         }
+    }
+    if (balise == "}")
+        code = 0;
+    else
+        code = 3;
+}
+
+std::unique_ptr<question> gestionnaireQuestionnaire::creeQuestion(const std::string& balise, std::istream &fichier)
+{
+    if (balise=="[QN]")
+    {
+        return lireQuestionNum(fichier);
+    }
+    else if (balise=="[QT]")
+    {
+        return lireQuestionTxt(fichier);
+    }
+    else if (balise=="[QCM]")
+    {
+        return lireQuestionChoixMultiples(fichier);
+    }
+    return nullptr;
+}
+
+void gestionnaireQuestionnaire::chargeQuestionnaire(questionnaire& quest, int &code)
+{
+    std::ifstream fichier(quest.nomFichier());
+    if (!fichier)
+    {
+        code=1;
+    }
+    else if (!valideEntete(fichier))
+    {
+        code=2;
     }
     else
     {
-        return 1;   //Impossible d'ouvrir le fichier ou corrompu
+        analyseQuestions(quest, fichier, code);
     }
-    return 0;
 }
 
 

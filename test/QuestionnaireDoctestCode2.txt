@@ -1,0 +1,16 @@
+CECI N'EST PAS UN QUESTIONNAIRE
+{
+[QT]
+Quelle est le vrai nom de "The rock" ?
+Dwan jonson
+[QCM]
+Pourquoi je te suis supérieur ?
+Je suis plus beau
+Je suis plus fort
+Je suis plus intelligent
+Pour toutes les raisons cité précédement
+4
+[QN]
+Qulle est le diamètre de la terre
+5900 6100
+}
