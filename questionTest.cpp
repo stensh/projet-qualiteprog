@@ -5,7 +5,6 @@
 
 #include <string>
 
-#include "doctest.h"
 
 void questionBienConstruite(const sujet::question& q,const std::string& intitule,
                             const std::string& texte)

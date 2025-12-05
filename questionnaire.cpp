@@ -5,11 +5,8 @@ namespace sujet
 {
 
 
-questionnaire::questionnaire(std::string& nomFichier):
+questionnaire::questionnaire(const std::string& nomFichier):
     d_questions{}, d_nomFichier{nomFichier}
-{}
-
-questionnaire::~questionnaire()
 {}
 
 question& questionnaire::questionCourante(int indice) const

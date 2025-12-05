@@ -13,8 +13,8 @@ namespace sujet
 class questionnaire
 {
     public:
-        questionnaire(std::string& nomFichier);
-        ~questionnaire();
+        questionnaire(const std::string& nomFichier);
+        ~questionnaire() = default ;
 
 
         question& questionCourante(int indice) const;    //Renvoie la question demandée indice.

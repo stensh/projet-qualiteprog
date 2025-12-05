@@ -11,7 +11,7 @@ class questionTexte : public question
     public:
         questionTexte(const std::string& intitule, const std::string& texte, const std::string& reponse);
 
-        std::string reponse() const;    //Renvoie la bonne réponse.
+        std::string reponse() const override;    //Renvoie la bonne réponse.
         bool reponseJuste(const std::string& reponse) const override;
 
     private:

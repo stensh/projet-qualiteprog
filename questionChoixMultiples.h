@@ -12,7 +12,7 @@ class questionChoixMultiples: public question
         questionChoixMultiples(const std::string& intitule, const std::string& texte, int bonneReponse);  //Ici la reponse passé en paramètre est le numéro de la bonne réponse.
 
         std::string reponse() const override;    //Renvoie le numéro de la réponse.
-        bool reponseJuste(const std::string& reponse) const override;  //Indique si la réponse passé en paramètre est juste.
+        bool reponseJuste(const std::string& reponse) const override;  //Indique si la réponse passée en paramètre est juste.
 
     private:
         int d_bonneReponse;  //Le numéro de la bonne réponse à la question.
