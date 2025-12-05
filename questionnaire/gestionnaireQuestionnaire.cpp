@@ -6,7 +6,7 @@ namespace sujet
 
 
 
-std::unique_ptr<questionNumerique> gestionnaireQuestionnaire::lireQuestionNum(std::ifstream& fichier)
+std::unique_ptr<questionNumerique> gestionnaireQuestionnaire::lireQuestionNum(std::istream& fichier)
 {
     std::string intitule, texte;
     int  limMin, limMax;
