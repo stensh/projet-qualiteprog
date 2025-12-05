@@ -5,24 +5,29 @@ namespace sujet
 {
 
 
-questionnaire::questionnaire(std::string& nomFichier):
-    d_questions{}, d_nomFichier{nomFichier}
-{}
+    questionnaire::questionnaire(const std::string& nomFichier):
+        d_questions{}, d_nomFichier{nomFichier}
+    {}
 
-question& questionnaire::questionCourante(int indice) const
-{
-    return *d_questions[indice];
-}
+    const std::unique_ptr<question>& questionnaire::questionIndice(int indice) const
+    {
+        return d_questions[indice];
+    }
 
-void questionnaire::ajouteQuestion(std::unique_ptr<question> &q)
-{
-    d_questions.push_back(std::move(q));
-}
+    void questionnaire::ajouteQuestion(std::unique_ptr<question> q)
+    {
+        d_questions.push_back(std::move(q));
+    }
 
-std::string questionnaire::nomFichier() const
-{
-    return d_nomFichier;
-}
+    std::string questionnaire::nomFichier() const
+    {
+        return d_nomFichier;
+    }
+
+    int questionnaire::taille() const
+    {
+        return d_questions.size();
+    }
 
 
 
