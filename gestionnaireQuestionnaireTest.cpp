@@ -154,7 +154,7 @@ TEST_CASE("Test de la fonction analyseQuestions")
 {
     sujet::gestionnaireQuestionnaire gq{};
     int code;
-    std::string nomFichier = "";
+    std::string nomFichier = {};
     SUBCASE("Analyse réussie avec plusieurs questions")
     {
         sujet::questionnaire q{nomFichier};
