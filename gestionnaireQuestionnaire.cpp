@@ -60,7 +60,7 @@ bool gestionnaireQuestionnaire::valideEntete(std::ifstream &fichier)
     return balise=="{";
 }
 
-int gestionnaireQuestionnaire::analyseQuestions(questionnaire *ques, std::ifstream &fichier)
+int gestionnaireQuestionnaire::analyseQuestions(questionnaire &ques, std::ifstream &fichier)
 {
     std::string balise;
     while (std::getline(fichier,balise) and balise!="}")
@@ -70,7 +70,7 @@ int gestionnaireQuestionnaire::analyseQuestions(questionnaire *ques, std::ifstre
         {
             return 3;
         }
-        ques->ajouteQuestion(std::move(question));
+        ques.ajouteQuestion(std::move(question));
     }
     return 0;
 }
@@ -92,9 +92,9 @@ std::unique_ptr<question> gestionnaireQuestionnaire::creeQuestion(const std::str
     return nullptr;
 }
 
-int gestionnaireQuestionnaire::chargeQuestionnaire(questionnaire* quest)
+int gestionnaireQuestionnaire::chargeQuestionnaire(questionnaire& quest)
 {
-    std::ifstream fichier(quest->nomFichier());
+    std::ifstream fichier(quest.nomFichier());
     if (!fichier)
     {
         return 1;
