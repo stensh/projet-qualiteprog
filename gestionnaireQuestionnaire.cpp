@@ -4,12 +4,6 @@
 namespace sujet
 {
 
-gestionnaireQuestionnaire::gestionnaireQuestionnaire()
-{}
-
-gestionnaireQuestionnaire::~gestionnaireQuestionnaire()
-{}
-
 
 std::unique_ptr<questionNumerique> gestionnaireQuestionnaire::lireQuestionNum(std::istream& fichier)
 {
@@ -33,11 +27,11 @@ std::unique_ptr<questionTexte> gestionnaireQuestionnaire::lireQuestionTxt(std::i
 
 std::unique_ptr<questionChoixMultiples> gestionnaireQuestionnaire::lireQuestionChoixMultiples(std::istream& fichier)
 {
-    std::string intitule, texte, texteGet;
+    std::string intitule, texteGet;
     int reponse;
     getline(fichier, intitule);
     getline(fichier, texteGet);
-    texte = texteGet;
+    std::string texte = texteGet;
     for (int i{0}; i<4; ++i)
     {
         getline(fichier, texteGet);
