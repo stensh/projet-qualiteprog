@@ -17,7 +17,7 @@ class questionnaire
         ~questionnaire();
 
 
-        std::unique_ptr<question> questionCourante(int indice) const;
+        const std::unique_ptr<question>& questionCourante(int indice) const; // référence constante pour accès en lecture
         int taille() const;
 
         void ajouteQuestion(std::unique_ptr<question>& q);

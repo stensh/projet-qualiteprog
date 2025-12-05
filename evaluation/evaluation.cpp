@@ -3,7 +3,7 @@
 namespace test
 {
     evaluation::evaluation(const sujet::questionnaire& q)
-        : d_questionnaire{q}, d_indiceCourant{1}, d_nbBonnesReponses{0}, d_nbQuestionsPosees{0}
+        : d_questionnaire{q}, d_indiceCourant{0}, d_nbBonnesReponses{0}, d_nbQuestionsPosees{0}
     {}
 
     int evaluation::indiceCourant() const
@@ -41,7 +41,7 @@ namespace test
         ++d_indiceCourant;
     }
 
-    std::unique_ptr<sujet::question> evaluation::questionCourante() const
+    const std::unique_ptr<sujet::question>& evaluation::questionCourante() const
     {
         return d_questionnaire.questionCourante(d_indiceCourant);
     }

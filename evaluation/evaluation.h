@@ -20,10 +20,10 @@ namespace test
         int questionsPosees() const;
 
         // Modifieurs
-        void incrementeBonnesReponses(); // changer les noms ?
+        void incrementeBonnesReponses();
         void incrementeQuestionsPosees();
         void incrementeIndiceCourant();
-        std::unique_ptr<sujet::question> questionCourante() const;
+        const std::unique_ptr<sujet::question>& questionCourante() const;
 
         // Méthodes virtuelles pures
         virtual bool resteQuestions() const = 0;
@@ -32,7 +32,7 @@ namespace test
         virtual double resultats() const = 0;
     private:
         int d_indiceCourant, d_nbBonnesReponses, d_nbQuestionsPosees; // calculé ?
-        sujet::questionnaire d_questionnaire;
+        const sujet::questionnaire& d_questionnaire; // on utilise une référence constante
     };
 }
 

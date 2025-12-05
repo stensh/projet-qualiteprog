@@ -13,14 +13,23 @@ namespace test
     class evaluationAdaptative : public evaluation
     {
     public:
+        // Constructeur
         evaluationAdaptative(const sujet::questionnaire& q);
+
+        // Méthodes surchargées
         bool resteQuestions() const override;
         bool afficherBonneReponse() const override;
         void questionSuivante() override;
         double resultats() const override;
+
+        // Méthodes propres à la classe
+        void marquerEchec();
     private:
-        int d_nbEssais;
+        int d_nbEssais, d_positionOrdre;
+        std::vector<int> d_ordreQuestions;
+
+        void melangerQuestions(); // Mélanger l'ordre des questions
     };
-} // test
+}
 
 #endif //PROJET_QUALITEPROG_EVALUATIONADAPTATIVE_H

@@ -10,7 +10,7 @@ namespace test {
         public:
             gestionnaireEvaluation();
             ~gestionnaireEvaluation();
-            void commencerEvaluation(sujet::questionnaire* quest, std::unique_ptr<evaluation>& eval) const;
+            void commencerEvaluation(std::unique_ptr<evaluation>& eval) const;
     };
 }
 
