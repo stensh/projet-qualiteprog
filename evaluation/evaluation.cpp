@@ -43,6 +43,6 @@ namespace test
 
     const std::unique_ptr<sujet::question>& evaluation::questionCourante() const
     {
-        return d_questionnaire.questionCourante(d_indiceCourant);
+        return d_questionnaire.questionIndice(d_indiceCourant);
     }
 }
