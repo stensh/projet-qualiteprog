@@ -3,7 +3,7 @@
 
 #include  <string>
 
-TEST_CASE("La réponse est bien construite et opérationel")
+TEST_CASE("La réponse est bien construite et opérationelle")
 {
     std::string s = "Hello World";
     test::reponse rep{s};
