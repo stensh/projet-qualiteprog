@@ -1,4 +1,4 @@
-#include <fstream>
+#include <istream>
 #include "gestionnaireQuestionnaire.h"
 
 namespace sujet
@@ -11,7 +11,7 @@ gestionnaireQuestionnaire::~gestionnaireQuestionnaire()
 {}
 
 
-std::unique_ptr<questionNumerique> gestionnaireQuestionnaire::lireQuestionNum(std::ifstream& fichier)
+std::unique_ptr<questionNumerique> gestionnaireQuestionnaire::lireQuestionNum(std::istream& fichier)
 {
     std::string intitule, texte;
     int  limMin, limMax;
@@ -22,7 +22,7 @@ std::unique_ptr<questionNumerique> gestionnaireQuestionnaire::lireQuestionNum(st
     return std::make_unique<questionNumerique>(intitule,texte,limMin,limMax);
 }
 
-std::unique_ptr<questionTexte> gestionnaireQuestionnaire::lireQuestionTxt(std::ifstream& fichier)
+std::unique_ptr<questionTexte> gestionnaireQuestionnaire::lireQuestionTxt(std::istream& fichier)
 {
     std::string intitule, texte, reponse;
     getline(fichier, intitule);
@@ -31,7 +31,7 @@ std::unique_ptr<questionTexte> gestionnaireQuestionnaire::lireQuestionTxt(std::i
     return std::make_unique<questionTexte>(intitule,texte,reponse);
 }
 
-std::unique_ptr<questionChoixMultiples> gestionnaireQuestionnaire::lireQuestionChoixMultiples(std::ifstream& fichier)
+std::unique_ptr<questionChoixMultiples> gestionnaireQuestionnaire::lireQuestionChoixMultiples(std::istream& fichier)
 {
     std::string intitule, texte, texteGet;
     int reponse;
@@ -48,7 +48,7 @@ std::unique_ptr<questionChoixMultiples> gestionnaireQuestionnaire::lireQuestionC
     return std::make_unique<questionChoixMultiples>(intitule,texte,reponse);
 }
 
-bool gestionnaireQuestionnaire::valideEntete(std::ifstream &fichier)
+bool gestionnaireQuestionnaire::valideEntete(std::istream &fichier)
 {
     std::string balise;
     std::getline(fichier, balise);
@@ -60,22 +60,28 @@ bool gestionnaireQuestionnaire::valideEntete(std::ifstream &fichier)
     return balise=="{";
 }
 
-int gestionnaireQuestionnaire::analyseQuestions(questionnaire &ques, std::ifstream &fichier)
+void gestionnaireQuestionnaire::analyseQuestions(questionnaire &ques, std::istream &fichier, int &code)
 {
     std::string balise;
-    while (std::getline(fichier,balise) and balise!="}")
+    while (std::getline(fichier,balise) and balise!="}")    //A demander au prof.
     {
         auto question = creeQuestion(balise, fichier);
-        if (question==nullptr)
+        if (question!=nullptr)
         {
-            return 3;
+            ques.ajouteQuestion(std::move(question));
         }
-        ques.ajouteQuestion(std::move(question));
+        else
+        {
+            break;
+        }
     }
-    return 0;
+    if (balise == "}")
+        code = 0;
+    else
+        code = 3;
 }
 
-std::unique_ptr<question> gestionnaireQuestionnaire::creeQuestion(const std::string& balise, std::ifstream &fichier)
+std::unique_ptr<question> gestionnaireQuestionnaire::creeQuestion(const std::string& balise, std::istream &fichier)
 {
     if (balise=="[QN]")
     {
@@ -92,18 +98,21 @@ std::unique_ptr<question> gestionnaireQuestionnaire::creeQuestion(const std::str
     return nullptr;
 }
 
-int gestionnaireQuestionnaire::chargeQuestionnaire(questionnaire& quest)
+void gestionnaireQuestionnaire::chargeQuestionnaire(questionnaire& quest, int &code)
 {
     std::ifstream fichier(quest.nomFichier());
     if (!fichier)
     {
-        return 1;
+        code=1;
     }
-    if (!valideEntete(fichier))
+    else if (!valideEntete(fichier))
     {
-        return 2;
+        code=2;
     }
-    return analyseQuestions(quest, fichier);
+    else
+    {
+        analyseQuestions(quest, fichier, code);
+    }
 }
 
 
