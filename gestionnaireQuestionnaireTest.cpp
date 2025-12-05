@@ -8,7 +8,7 @@ TEST_CASE("Test des différents codes d'erreurs")
     int code;
     SUBCASE("Code de retour 1")
     {
-        std::string nomFichier = "QuestionnaireInexistantCode1.txt";
+        std::string nomFichier = "../QuestionnaireInexistantCode1.txt";
         sujet::questionnaire q{nomFichier};
         sujet::gestionnaireQuestionnaire gq;
         gq.chargeQuestionnaire(q,code);
@@ -16,7 +16,7 @@ TEST_CASE("Test des différents codes d'erreurs")
     }
     SUBCASE("Code de retour 2")
     {
-        std::string nomFichier = "QuestionnaireDoctestCode2.txt";
+        std::string nomFichier = "../QuestionnaireDoctestCode2.txt";
         sujet::questionnaire q{nomFichier};
         sujet::gestionnaireQuestionnaire gq;
         gq.chargeQuestionnaire(q,code);
@@ -154,9 +154,9 @@ TEST_CASE("Test de la fonction analyseQuestions")
 {
     sujet::gestionnaireQuestionnaire gq{};
     int code;
+    std::string nomFichier = "";
     SUBCASE("Analyse réussie avec plusieurs questions")
     {
-        std::string nomFichier = "";
         sujet::questionnaire q{nomFichier};
         std::istringstream fichier("[QT]\n"
                                     "Cat1\n"
@@ -173,7 +173,6 @@ TEST_CASE("Test de la fonction analyseQuestions")
 
     SUBCASE("Analyse échouée avec balise invalide")
     {
-        std::string nomFichier = "";
         sujet::questionnaire q{nomFichier};
         std::istringstream fichier("[QX]\n"
                                     "Cat1\n"
@@ -185,7 +184,6 @@ TEST_CASE("Test de la fonction analyseQuestions")
 
     SUBCASE("Analyse d'un questionnaire vide")
     {
-        std::string nomFichier = "";
         sujet::questionnaire q{nomFichier};
         std::istringstream fichier("}\n");
         gq.analyseQuestions(q, fichier, code);
@@ -197,7 +195,7 @@ TEST_CASE("Test d'intégration - Chargement complet")
 {
     SUBCASE("Chargement d'un questionnaire complet valide")
     {
-        std::string nomFichier = "QuestionnaireDoctestCode0.txt";
+        std::string nomFichier = "../QuestionnaireDoctestCode0.txt";
         sujet::questionnaire q{nomFichier};
         sujet::gestionnaireQuestionnaire gq;
         int code;

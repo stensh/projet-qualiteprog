@@ -19,10 +19,10 @@ class gestionnaireQuestionnaire
         ~gestionnaireQuestionnaire();
 
         /**
-        * @return 0 si le fichier a été lu
-        * @return 1 si le fichier n'a pu être ouvert
-        * @return 2 si le fichier n'est pas un fichier questionnaire
-        * @return 3 si une erreur est survenu lors de la lecture du fichier
+        * @param code = 0 si le fichier a été lu
+        * @param code = 1 si le fichier n'a pu être ouvert
+        * @param code = 2 si le fichier n'est pas un fichier questionnaire
+        * @param code = 3 si une erreur est survenu lors de la lecture du fichier
         */
         void chargeQuestionnaire(questionnaire& quest, int &code);
         bool valideEntete(std::istream& fichier);
