@@ -3,22 +3,24 @@
 
 #include "evaluation.h"
 
-/**
-* Chaque question est posée dans l'ordre, sans afficher les bonnes réponses
-*/
-
 namespace test
 {
     class evaluationTest : public evaluation
     {
     public:
-        evaluationTest();
-        void commencer(const int /*Questionnaire&*/ q) const override;
+        // Constructeur
+        evaluationTest(const sujet::questionnaire& q);
+
+        // Méthodes surchargées
+        const std::unique_ptr<sujet::question>& questionCourante() const override;
         bool resteQuestions() const override;
-        int /*plutôt Question*/ & questionCourante() override;
+        bool afficherBonneReponse() const override;
         void questionSuivante() override;
-        void afficherResultats();
+        double resultats() const override;
+
+    private:
+        int d_indiceCourant;
     };
-} // test
+}
 
 #endif //PROJET_QUALITEPROG_EVALUATIONTEST_H

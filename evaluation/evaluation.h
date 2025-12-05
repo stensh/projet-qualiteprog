@@ -1,22 +1,42 @@
 #ifndef PROJET_QUALITEPROG_EVALUATION_H
 #define PROJET_QUALITEPROG_EVALUATION_H
 
+#include "questionnaire/question.h"
+#include "questionnaire/questionnaire.h"
+
 namespace test
 {
     class evaluation
     {
     public:
-        evaluation();
+        // Constructeur et desctructeur virtuel
+        evaluation(const sujet::questionnaire& q);
         virtual ~evaluation() = default;
-        virtual void commencer(const int /*Questionnaire&*/ q) const = 0;
+
+        // Accesseurs
+        int bonnesReponses() const;
+        int nbQuestions() const;
+        int questionsPosees() const;
+
+        // Modifieurs
+        void incrementeBonnesReponses();
+        void incrementeQuestionsPosees();
+
+        // Méthodes virtuelles pures
+        virtual const std::unique_ptr<sujet::question>& questionCourante() const = 0;
+            // virtuelle car on change l'approche de question courante pour chaque type d'évaluation
         virtual bool resteQuestions() const = 0;
-        virtual int /* plutôt Question */ questionCourante() const = 0;
         virtual bool afficherBonneReponse() const = 0;
-        virtual void questionSuivante() const = 0;
-        virtual void afficherResultats() const = 0;
+        virtual void questionSuivante() = 0;
+        virtual double resultats() const = 0; // Donne la note sur 20
+
+    protected:
+        const sujet::questionnaire& questionnaire() const; // accès protégé au questionnaire pour les sous-classes
+
     private:
-        int d_nbBonnesReponses, d_nbEssais;
+        int d_nbBonnesReponses, d_nbQuestionsPosees;
+        const sujet::questionnaire& d_questionnaire; // On utilise une référence constante
     };
-} // test
+}
 
 #endif //PROJET_QUALITEPROG_EVALUATION_H

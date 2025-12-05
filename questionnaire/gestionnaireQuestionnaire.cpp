@@ -1,11 +1,12 @@
-#include <istream>
-#include "questionnaire/gestionnaireQuestionnaire.h"
+#include <fstream>
+#include "gestionnaireQuestionnaire.h"
 
 namespace sujet
 {
 
 
-std::unique_ptr<questionNumerique> gestionnaireQuestionnaire::lireQuestionNum(std::istream& fichier)
+
+std::unique_ptr<questionNumerique> gestionnaireQuestionnaire::lireQuestionNum(std::ifstream& fichier)
 {
     std::string intitule, texte;
     int  limMin, limMax;

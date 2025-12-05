@@ -1,6 +1,9 @@
 #ifndef PROJET_QUALITEPROG_EVALUATIONSECONDECHANCE_H
 #define PROJET_QUALITEPROG_EVALUATIONSECONDECHANCE_H
 
+#include <vector>
+#include <memory>
+#include <map>
 #include "evaluation.h"
 
 /**
@@ -10,15 +13,28 @@
 
 namespace test
 {
-    class evaluationSecondeChance
+    class evaluationSecondeChance : public evaluation
     {
     public:
-        evaluationSecondeChance();
-        void commencer(const int /*Questionnaire&*/ q) const override;
-        bool afficherBonneReponse() const override;
+        // Constructeur
+        evaluationSecondeChance(const sujet::questionnaire& q);
+
+        // Méthodes surchargées
+        const std::unique_ptr<sujet::question>& questionCourante() const override;
+        bool resteQuestions() const override;
+        bool afficherBonneReponse() const override; // Affichage au bout du deuxième échec
+        void questionSuivante() override;
+        double resultats() const override;
+
+        // Méthodes propres à la classe
+        void marquerReussite(int indice);
+        void marquerEchec(int indice);
+
     private:
-        bool d_secondeChance; // booléen pour indiquer si la seconde chance a été utilisée ou pas
+        int d_positionCourante; // Position actuelle dans le tableau d'indices
+        std::vector<int> d_toutesLesQuestions; // Indices de toutes les questions (du questionnaire et reposées)
+        std::map<int, int> d_nbEssais; // Clé entre l'indice de la question et le nombre d'essais
     };
-} // test
+}
 
 #endif //PROJET_QUALITEPROG_EVALUATIONSECONDECHANCE_H
