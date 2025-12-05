@@ -5,6 +5,8 @@
 
 #include <string>
 
+#include "doctest.h"
+
 void questionBienConstruite(const sujet::question& q,const std::string& intitule,
                             const std::string& texte)
 {
@@ -12,56 +14,53 @@ void questionBienConstruite(const sujet::question& q,const std::string& intitule
     REQUIRE_EQ(q.texte(),texte);
 }
 
-//Question Numérique
-TEST_CASE("La question numérique est bien construite")
+TEST_CASE("La construction d'une question est correcte")
 {
     std::string intitule{"intitule"}, texte{"texte"};
-    int min{45}, max{50};
-    sujet::questionNumerique q{intitule,texte,min,max};
-    SUBCASE("La question est bien construite")
-    {
-        questionBienConstruite(q,intitule,texte);
-    }
-   SUBCASE("Les données de la classe question numérique sont bien assignées")
-    {
-        REQUIRE_EQ(q.limiteMin(),min);
-        REQUIRE_EQ(q.limiteMax(),max);
-        REQUIRE((q.reponseJuste(std::to_string(min))));
-        REQUIRE((q.reponseJuste(std::to_string(min+1))));
-        REQUIRE((q.reponseJuste(std::to_string(max))));
-    }
-}
 
-//Question à choix multiples
-TEST_CASE("La question choix multiples est bien construite")
-{
-    std::string intitule{"intitule"}, texte{"texte"};
-    int reponse{3};
-    sujet::questionChoixMultiples q{intitule,texte,reponse};
-    SUBCASE("La question est bien construite")
+    SUBCASE("La construction d'une question numérique est correcte")
     {
-        questionBienConstruite(q,intitule,texte);
+        int min{45}, max{50};
+        sujet::questionNumerique q{intitule,texte,min,max};
+        SUBCASE("La construction de la partie question est correcte")
+        {
+            questionBienConstruite(q,intitule,texte);
+        }
+        SUBCASE("Les données de la question numérique sont bien assignées")
+        {
+            REQUIRE_EQ(q.limiteMin(),min);
+            REQUIRE_EQ(q.limiteMax(),max);
+            REQUIRE((q.reponseJuste(std::to_string(min+2))));
+            REQUIRE_FALSE((q.reponseJuste(std::to_string(max+1))));
+        }
     }
-    SUBCASE("Les données de la classe question à choix multiples")
+    SUBCASE("La construction d'une question à choix multiples est correcte")
     {
-        REQUIRE_EQ(std::stoi(q.reponse()),reponse);
-        REQUIRE(q.reponseJuste(std::to_string(reponse)));
+        int reponse{3};
+        sujet::questionChoixMultiples q{intitule,texte,reponse};
+        SUBCASE("La construction de la partie question est correcte")
+        {
+            questionBienConstruite(q,intitule,texte);
+        }
+        SUBCASE("Les données de la question à choix multiples sont bien assignées")
+        {
+            REQUIRE_EQ(std::stoi(q.reponse()),reponse);
+            REQUIRE(q.reponseJuste(std::to_string(reponse)));
+        }
     }
-}
+    SUBCASE("La construction d'une question texte est correcte")
+    {
+        std::string reponse{"reponse"};
+        sujet::questionTexte q{intitule,texte,reponse};
 
-//Questions texte
-TEST_CASE("La question texte est bien construite")
-{
-    std::string intitule{"intitule"}, texte{"texte"},reponse{"reponse"};
-    sujet::questionTexte q{intitule,texte,reponse};
-
-    SUBCASE("La question est bien construite")
-    {
-        questionBienConstruite(q,intitule,texte);
-    }
-    SUBCASE("Les données de la classe question à choix multiples")
-    {
-        REQUIRE_EQ(q.reponse(), reponse);
-        REQUIRE(q.reponseJuste(reponse));
+        SUBCASE("La construction de la partie question est correcte")
+        {
+            questionBienConstruite(q,intitule,texte);
+        }
+        SUBCASE("Les données de la classe question à choix multiples")
+        {
+            REQUIRE_EQ(q.reponse(), reponse);
+            REQUIRE(q.reponseJuste(reponse));
+        }
     }
 }
