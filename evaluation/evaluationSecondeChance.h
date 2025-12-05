@@ -29,6 +29,7 @@ namespace test
         // Méthodes propres à la classe
         void marquerReussite(int indice);
         void marquerEchec(int indice);
+
     private:
         int d_positionCourante; // Position actuelle dans le tableau d'indices
         std::vector<int> d_toutesLesQuestions; // Indices de toutes les questions (du questionnaire et reposées)

@@ -17,6 +17,7 @@ namespace test
         bool afficherBonneReponse() const override;
         void questionSuivante() override;
         double resultats() const override;
+
     private:
         int d_indiceCourant;
     };

@@ -29,8 +29,10 @@ namespace test
         virtual bool afficherBonneReponse() const = 0;
         virtual void questionSuivante() = 0;
         virtual double resultats() const = 0; // Donne la note sur 20
+
     protected:
         const sujet::questionnaire& questionnaire() const; // accès protégé au questionnaire pour les sous-classes
+
     private:
         int d_nbBonnesReponses, d_nbQuestionsPosees;
         const sujet::questionnaire& d_questionnaire; // On utilise une référence constante

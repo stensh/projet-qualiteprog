@@ -25,6 +25,7 @@ namespace test
 
         // Méthodes propres à la classe
         void marquerEchec();
+
     private:
         int d_nbEssais, d_positionOrdre;
         std::vector<int> d_ordreQuestions;
