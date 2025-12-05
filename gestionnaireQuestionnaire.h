@@ -24,9 +24,9 @@ class gestionnaireQuestionnaire
         * @return 2 si le fichier n'est pas un fichier questionnaire
         * @return 3 si une erreur est survenu lors de la lecture du fichier
         */
-        int chargeQuestionnaire(questionnaire* quest);
+        int chargeQuestionnaire(questionnaire& quest);
         bool valideEntete(std::ifstream& fichier);
-        int analyseQuestions (questionnaire* ques, std::ifstream& fichier);
+        int analyseQuestions (questionnaire& ques, std::ifstream& fichier);
 
         std::unique_ptr<question> creeQuestion(const std::string& balise, std::ifstream& fichier);
         std::unique_ptr<questionNumerique> lireQuestionNum(std::ifstream& fichier);
