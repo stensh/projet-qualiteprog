@@ -86,9 +86,9 @@ TEST_CASE("Test de la fonction lireQuestionNum")
     }
 }
 
-TEST_CASE("Test de la fonction lireQuestionNum")
+TEST_CASE("Test de la fonction lireQuestionTxt")
 {
-    SUBCASE("Lecture correcte d'une question numérique")
+    SUBCASE("Lecture correcte d'une question texte")
     {
         sujet::gestionnaireQuestionnaire gq{};
         std::istringstream fichier("Catégorie\n"
@@ -155,9 +155,9 @@ TEST_CASE("Test de la fonction analyseQuestions")
     sujet::gestionnaireQuestionnaire gq{};
     int code;
     std::string nomFichier = {};
+    sujet::questionnaire q{nomFichier};
     SUBCASE("Analyse réussie avec plusieurs questions")
     {
-        sujet::questionnaire q{nomFichier};
         std::istringstream fichier("[QT]\n"
                                     "Cat1\n"
                                     "Question 1\n"
@@ -173,7 +173,6 @@ TEST_CASE("Test de la fonction analyseQuestions")
 
     SUBCASE("Analyse échouée avec balise invalide")
     {
-        sujet::questionnaire q{nomFichier};
         std::istringstream fichier("[QX]\n"
                                     "Cat1\n"
                                     "Question 1\n"
@@ -184,7 +183,6 @@ TEST_CASE("Test de la fonction analyseQuestions")
 
     SUBCASE("Analyse d'un questionnaire vide")
     {
-        sujet::questionnaire q{nomFichier};
         std::istringstream fichier("}\n");
         gq.analyseQuestions(q, fichier, code);
         REQUIRE_EQ(code, 0);
