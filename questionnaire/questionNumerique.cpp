@@ -4,17 +4,17 @@ namespace sujet
 {
 //Constructeur
 questionNumerique::questionNumerique(const std::string& intitule,const  std::string& texte,int limMin,int limMax):
-    question{intitule,texte}, d_limMin{limMin}, d_limMax{limMax}
+    question{intitule,texte}, d_limiteMin{limMin}, d_limiteMax{limMax}
 {}
 //renvoie la limite minimal
 int questionNumerique::limiteMin()const
 {
-    return d_limMin;
+    return d_limiteMin;
 }
 //Renvoie la limite maximal
 int questionNumerique::limiteMax()const
 {
-    return d_limMax;
+    return d_limiteMax;
 }
 
 std::string questionNumerique::reponse() const
