@@ -198,3 +198,19 @@ TEST_CASE("Chargement d'un questionnaire complet valide")
     gq.chargeQuestionnaire(q,code);
     REQUIRE_EQ(code, 0);
 }
+
+TEST_CASE("Test la taille d'un questionnaire")
+{
+    SUBCASE("Taille par défaut égal 0")
+    {
+        sujet::questionnaire q{};
+        REQUIRE_EQ(q.taille(), 0);
+    }
+    SUBCASE("Taille augmente après ajout de question")
+    {
+        sujet::questionnaire q{};
+        auto qTexte(std::make_unique<sujet::questionTexte>("intitule", "texte", "reponse"));
+        q.ajouteQuestion(std::move(qTexte));
+        REQUIRE_EQ(q.taille(), 1);
+    }
+}
