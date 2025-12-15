@@ -15,21 +15,13 @@ namespace test
         {
             const auto& q = *eval.questionCourante(); // à revoir
             ost << q.contenu() << std::endl;
+
             std::string donnee = lireReponse(ist, ost);
             reponse rep{donnee};
             traiterReponse(q, rep);
 
-            if (rep.valide())
-            {
-                eval.incrementeBonnesReponses();
-                ost << "Bonne réponse !" << std::endl;
-                eval.reussiteCourante();
-            }
-            else
-            {
-                ost << "Mauvaise réponse." << std::endl;
-                eval.echecCourant();
-            }
+            rep.valide() ? instructionsReponseValide(eval, ost) : instructionsReponseInvalide(eval, ost);
+
             afficherCorrectionSecondeChance(eval, q, ost);
             eval.questionSuivante();
         }
@@ -47,6 +39,19 @@ namespace test
     void gestionnaireEvaluation::traiterReponse(const sujet::question& q, reponse &rep) const
     {
         rep.changeValidite(q.reponseJuste(rep.donnee()));
+    }
+
+    void gestionnaireEvaluation::instructionsReponseValide(evaluation &eval, std::ostream &ost) const
+    {
+        eval.incrementeBonnesReponses();
+        ost << "Bonne réponse !" << std::endl;
+        eval.reussiteCourante();
+    }
+
+    void gestionnaireEvaluation::instructionsReponseInvalide(evaluation& eval, std::ostream& ost) const
+    {
+        ost << "Mauvaise réponse." << std::endl;
+        eval.echecCourant();
     }
 
     void gestionnaireEvaluation::afficherCorrectionSecondeChance(const evaluation& eval, const sujet::question& q, std::ostream& ost) const

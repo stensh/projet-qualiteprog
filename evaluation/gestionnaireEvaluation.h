@@ -1,7 +1,6 @@
 #ifndef PROJET_QUALITEPROG_GESTIONNAIREEVALUATION_H
 #define PROJET_QUALITEPROG_GESTIONNAIREEVALUATION_H
 
-#include <memory>
 #include "evaluation.h"
 #include "questionnaire/questionnaire.h"
 #include "questionnaire/question.h"
@@ -19,6 +18,8 @@ namespace test
     private:
         std::string lireReponse(std::istream& ist, std::ostream& ost) const;
         void traiterReponse(const sujet::question& q, reponse& rep) const;
+        void instructionsReponseValide(evaluation& eval, std::ostream& ost) const;
+        void instructionsReponseInvalide(evaluation& eval, std::ostream& ost) const;
         void afficherCorrectionSecondeChance(const evaluation& eval, const sujet::question& q, std::ostream& ost) const;
         void afficherResultats(evaluation& eval, std::ostream& ost) const;
     };
