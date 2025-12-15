@@ -189,15 +189,12 @@ TEST_CASE("Test de la fonction analyseQuestions")
     }
 }
 
-TEST_CASE("Test d'intégration - Chargement complet")
+TEST_CASE("Chargement d'un questionnaire complet valide")
 {
-    SUBCASE("Chargement d'un questionnaire complet valide")
-    {
-        std::string nomFichier = "../test/QuestionnaireDoctestCode0.txt";
-        sujet::questionnaire q{nomFichier};
-        sujet::gestionnaireQuestionnaire gq;
-        int code;
-        gq.chargeQuestionnaire(q,code);
-        REQUIRE_EQ(code, 0);
-    }
+    std::string nomFichier = "../test/QuestionnaireDoctestCode0.txt";
+    sujet::questionnaire q{nomFichier};
+    sujet::gestionnaireQuestionnaire gq;
+    int code;
+    gq.chargeQuestionnaire(q,code);
+    REQUIRE_EQ(code, 0);
 }
