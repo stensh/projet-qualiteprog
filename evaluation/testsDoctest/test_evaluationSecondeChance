@@ -16,7 +16,16 @@ TEST_CASE("L'évaluation seconde chance focntionne")
     REQUIRE_EQ(e.questionCourante()->contenu(), premiere_question);
     REQUIRE_UNARY_FALSE(e.afficherBonneReponse());
   }
-
+  SUBCASE("Le calcul des résultats fontionne")
+  {
+    SUBCASE("Aucun échec fonctionne"){
+      double noteParfaite{20.0};
+      e.incrementeBonnesReponses();
+      e.incrementeQuestionsPosees();
+      e.questionSuivante();
+      REQUIRE_EQ(e.resultats(), noteParfaite);
+    }
+  }
 
 
 
