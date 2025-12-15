@@ -1,10 +1,18 @@
 #include "doctest.h"
 #include "../../questionnaire/questionnaire.h"
+#include "../../questionnaire/questionTexte.h"
 #include "../evaluation.h"
 #include "../evaluationTest.h"
 
 TEST_CASE("L'évaluation de base fonctionne") {
-    sujet::questionnaire q{"fichierTest.txt"};
+    sujet::questionnaire q{""};
+    q.ajouteQuestion(
+        std::make_unique<sujet::questionTexte>(
+            "Capitales",
+            "Quelle est la capitale de la France ?",
+            "Paris"
+        )
+    );
     test::evaluationTest e{q};
     SUBCASE("Le constructeur de l'evaluation fonctionne") {
         REQUIRE_EQ(e.nbQuestions(), 1);
@@ -22,5 +30,3 @@ TEST_CASE("L'évaluation de base fonctionne") {
         }
     }
 }
-
-// TODO checker encore que le questionnaire est bien stocké
