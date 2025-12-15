@@ -2,58 +2,62 @@
 #include "../../questionnaire/questionnaire.h"
 #include "../evaluationTest.h"
 
-// TODO on re-teste le constructeur ?
-
-TEST_CASE("La navigation à travers les questions fonctionne") {
-    sujet::questionnaire q{"fichierTest.txt"};
-    test::evaluationTest e{q};
-
-    REQUIRE_UNARY(e.resteQuestions());
-    REQUIRE_EQ(e.questionCourante()->contenu(), "Question 1");
-
-    e.questionSuivante();
-    REQUIRE_UNARY(e.resteQuestions());
-    REQUIRE_EQ(e.questionCourante()->contenu(), "Question 2");
-
-    e.questionSuivante();
-    REQUIRE_UNARY(e.resteQuestions());
-    REQUIRE_EQ(e.questionCourante()->contenu(), "Question 3");
-
-    e.questionSuivante();
-    REQUIRE_UNARY_FALSE(e.resteQuestions());
-}
-
-TEST_CASE("Le calcul des résultats fonctionne") {
-    sujet::questionnaire q{"fichierTest.txt"};
-    test::evaluationTest e{q};
-    SUBCASE("Aucune question posée fonctionne") {
-        REQUIRE_EQ(e.resultats(), 0.0);
+TEST_CASE("L'évaluation test fonctionne") {
+    SUBCASE("L'indice courant est correct") {
+        // TODO tests sur l'indice courant (différence constructeur avec la classe de base)
     }
-    SUBCASE("Toutes les réponses correctes fonctionne") {
-        for (int i{0}; i < 4; ++i) {
+    SUBCASE("La navigation à travers les questions fonctionne") {
+        sujet::questionnaire q{"fichierTest.txt"};
+        test::evaluationTest e{q};
+
+        REQUIRE_UNARY(e.resteQuestions());
+        REQUIRE_EQ(e.questionCourante()->contenu(), "Question 1");
+
+        e.questionSuivante();
+        REQUIRE_UNARY(e.resteQuestions());
+        REQUIRE_EQ(e.questionCourante()->contenu(), "Question 2");
+
+        e.questionSuivante();
+        REQUIRE_UNARY(e.resteQuestions());
+        REQUIRE_EQ(e.questionCourante()->contenu(), "Question 3");
+
+        e.questionSuivante();
+        REQUIRE_UNARY_FALSE(e.resteQuestions());
+    }
+
+    SUBCASE("Le calcul des résultats fonctionne") {
+        sujet::questionnaire q{"fichierTest.txt"};
+        test::evaluationTest e{q};
+        SUBCASE("Aucune question posée fonctionne") {
+            double noteNulle {0.0};
+            REQUIRE_EQ(e.resultats(), noteNulle);
+        }
+        SUBCASE("Toutes les réponses correctes fonctionne") {
+            double noteParfaite {20.0};
             e.incrementeBonnesReponses();
             e.incrementeQuestionsPosees();
+            REQUIRE_EQ(e.resultats(), noteParfaite);
         }
-        REQUIRE_EQ(e.resultats(), 20.0);
-    }
-    SUBCASE("Réponses partiellement correctes fonctionne") {
-        for (int i{0}; i < 3; ++i) {
-            e.incrementeBonnesReponses();
+        SUBCASE("Réponses partiellement correctes fonctionne") {
+            double noteTroisQuart {75.0};
+            for (int i{0}; i < 3; ++i) {
+                e.incrementeBonnesReponses();
+                e.incrementeQuestionsPosees();
+            }
             e.incrementeQuestionsPosees();
+            REQUIRE_EQ(e.resultats(), noteTroisQuart);
         }
-        e.incrementeQuestionsPosees();
-        REQUIRE_EQ(e.resultats(), 75.0);
-    }
-    SUBCASE("Aucune bonne réponse fonctionne") {
-        for (int i{0}; i < 3; ++i) {
+        SUBCASE("Aucune bonne réponse fonctionne") {
+            double noteNulle {0.0};
             e.incrementeQuestionsPosees();
+            REQUIRE_EQ(e.resultats(), noteNulle);
         }
-        REQUIRE_EQ(e.resultats(), 0.0);
+    }
+
+    SUBCASE("Ne jamais afficher les bonnes réponses fonctionne") {
+        sujet::questionnaire q{"fichierTest.txt"};
+        test::evaluationTest e{q};
+        REQUIRE_UNARY_FALSE(e.afficherBonneReponse());
     }
 }
 
-TEST_CASE("Ne jamais afficher les bonnes réponses fonctionne") {
-    sujet::questionnaire q{"fichierTest.txt"};
-    test::evaluationTest e{q};
-    REQUIRE_UNARY_FALSE(e.afficherBonneReponse());
-}
