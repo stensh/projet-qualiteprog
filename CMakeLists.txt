@@ -49,3 +49,23 @@ add_executable(test
         test/questionnaireTest.cpp
         questionnaire/gestionnaireQuestionnaire.cpp
         test/gestionnaireQuestionnaireTest.cpp)
+
+#Apprentissage
+add_executable(testApprentissage
+        apprentissage/apprentissage.h
+        apprentissage/apprentissage.cpp
+        main.cpp
+        questionnaire/question.cpp
+        questionnaire/question.h
+        questionnaire/questionnaire.cpp
+        questionnaire/questionnaire.h
+        questionnaire/questionTexte.cpp
+        questionnaire/questionTexte.h
+        questionnaire/questionNumerique.cpp
+        questionnaire/questionNumerique.h
+        questionnaire/questionChoixMultiples.cpp
+        questionnaire/questionChoixMultiples.h
+        questionnaire/gestionnaireQuestionnaire.cpp
+        questionnaire/gestionnaireQuestionnaire.h
+        apprentissage/apprentissage.cpp
+)
