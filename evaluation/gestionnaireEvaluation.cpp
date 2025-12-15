@@ -17,8 +17,8 @@ namespace test
     void gestionnaireEvaluation::commencerEvaluation(std::unique_ptr<evaluation>& eval) const
     {
         // Pointeur vérifiant le type dynamique
-        auto* evalSeconde = dynamic_cast<*evaluationSecondeChance>(eval.get());
-        auto* evalAdapt = dynamic_cast<*evaluationAdaptative>(eval.get());
+        auto* evalSeconde = dynamic_cast<evaluationSecondeChance*>(eval.get());
+        auto* evalAdapt = dynamic_cast<evaluationAdaptative*>(eval.get());
 
         while (eval->resteQuestions())
         {
@@ -37,7 +37,7 @@ namespace test
                 std::cout << "Bonne réponse !" << std::endl;
 
                 if (evalSeconde)
-                    evalSeconde->marquerReussite(); // TODO manque l'indice courant
+                    evalSeconde->marquerReussite();
             }
             else
             {

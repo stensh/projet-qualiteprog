@@ -35,7 +35,7 @@ namespace test
 
     bool evaluationAdaptative::afficherBonneReponse() const
     {
-        // TODO lire l'énoncé
+        return false;
     }
 
     void evaluationAdaptative::questionSuivante()
@@ -45,7 +45,7 @@ namespace test
         ++d_positionOrdre;
     }
 
-    double evaluationAdaptative::resultats() const // TODO mettre ça dans une fonction commune non ?
+    double evaluationAdaptative::resultats() const
     {
         if (d_nbEssais == 0) return 0.0;
         return bonnesReponses() * 20.0 / d_nbEssais;

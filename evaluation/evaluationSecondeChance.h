@@ -27,8 +27,8 @@ namespace test
         double resultats() const override;
 
         // Méthodes propres à la classe
-        void marquerReussite(int indice);
-        void marquerEchec(int indice);
+        void marquerReussite();
+        void marquerEchec();
 
     private:
         int d_positionCourante; // Position actuelle dans le tableau d'indices

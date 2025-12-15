@@ -45,18 +45,18 @@ namespace test
         return bonnesReponses() * 20.0 / nbQuestions();
     }
 
-    void evaluationSecondeChance::marquerReussite(int indice)
+    void evaluationSecondeChance::marquerReussite()
     {
         int indiceQuestion = d_toutesLesQuestions[d_positionCourante];
         ++d_nbEssais[indiceQuestion];
     }
 
-    void evaluationSecondeChance::marquerEchec(int indice)
+    void evaluationSecondeChance::marquerEchec()
     {
         int indiceQuestion = d_toutesLesQuestions[d_positionCourante];
         ++d_nbEssais[indiceQuestion];
 
-        if (d_nbEssais[indice] == 1)
+        if (d_nbEssais[indiceQuestion] == 1)
         {
             d_toutesLesQuestions.push_back(indiceQuestion);
         }

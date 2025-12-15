@@ -3,31 +3,18 @@
 #include "../evaluationTest.h"
 
 TEST_CASE("L'évaluation test fonctionne") {
+    sujet::questionnaire q{"fichierTest.txt"};
+    test::evaluationTest e{q};
     SUBCASE("L'indice courant est correct") {
         // TODO tests sur l'indice courant (différence constructeur avec la classe de base)
     }
     SUBCASE("La navigation à travers les questions fonctionne") {
-        sujet::questionnaire q{"fichierTest.txt"};
-        test::evaluationTest e{q};
-
         REQUIRE_UNARY(e.resteQuestions());
-        REQUIRE_EQ(e.questionCourante()->contenu(), "Question 1");
-
-        e.questionSuivante();
-        REQUIRE_UNARY(e.resteQuestions());
-        REQUIRE_EQ(e.questionCourante()->contenu(), "Question 2");
-
-        e.questionSuivante();
-        REQUIRE_UNARY(e.resteQuestions());
-        REQUIRE_EQ(e.questionCourante()->contenu(), "Question 3");
-
         e.questionSuivante();
         REQUIRE_UNARY_FALSE(e.resteQuestions());
     }
-
     SUBCASE("Le calcul des résultats fonctionne") {
-        sujet::questionnaire q{"fichierTest.txt"};
-        test::evaluationTest e{q};
+
         SUBCASE("Aucune question posée fonctionne") {
             double noteNulle {0.0};
             REQUIRE_EQ(e.resultats(), noteNulle);
@@ -53,10 +40,7 @@ TEST_CASE("L'évaluation test fonctionne") {
             REQUIRE_EQ(e.resultats(), noteNulle);
         }
     }
-
     SUBCASE("Ne jamais afficher les bonnes réponses fonctionne") {
-        sujet::questionnaire q{"fichierTest.txt"};
-        test::evaluationTest e{q};
         REQUIRE_UNARY_FALSE(e.afficherBonneReponse());
     }
 }

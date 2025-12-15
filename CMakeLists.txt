@@ -19,5 +19,6 @@ add_executable(main
         evaluation/gestionnaireEvaluation.h
         evaluation/gestionnaireEvaluation.cpp
         evaluation/testsDoctest/test_evaluation.cpp
-        evaluation/testsDoctest/test_evaluationTest.cpp)
+        evaluation/testsDoctest/test_evaluationTest.cpp
+        evaluation/testsDoctest/test_evaluationAdaptative.cpp)
 
