@@ -13,6 +13,8 @@ namespace sujet
     class questionnaire
     {
     public:
+        questionnaire();
+
         //Constructeur et destructeur
         questionnaire(const std::string& nomFichier);
         ~questionnaire() = default ;

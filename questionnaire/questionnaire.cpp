@@ -3,7 +3,9 @@
 
 namespace sujet
 {
-
+    questionnaire::questionnaire():
+        d_nomFichier{}, d_questions{}
+    {}
 
     questionnaire::questionnaire(const std::string& nomFichier):
         d_questions{}, d_nomFichier{nomFichier}
