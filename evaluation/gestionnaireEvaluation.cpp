@@ -1,8 +1,5 @@
 #include <iostream>
 #include "gestionnaireEvaluation.h"
-
-#include "evaluationAdaptative.h"
-#include "evaluationSecondeChance.h"
 #include "questionnaire/reponse.h"
 
 namespace test
@@ -13,53 +10,64 @@ namespace test
     gestionnaireEvaluation::~gestionnaireEvaluation()
     {}
 
-    // TODO séparer la fonction en plusieurs petites
-    void gestionnaireEvaluation::commencerEvaluation(std::unique_ptr<evaluation>& eval) const
+    void gestionnaireEvaluation::commencerEvaluation(std::unique_ptr<evaluation> eval) const
     {
-        // Pointeur vérifiant le type dynamique
-        auto* evalSeconde = dynamic_cast<*evaluationSecondeChance>(eval.get());
-        auto* evalAdapt = dynamic_cast<*evaluationAdaptative>(eval.get());
+        commencerEvaluation(eval, std::cin, std::cout);
+    }
 
+    void gestionnaireEvaluation::commencerEvaluation(std::unique_ptr<evaluation> eval, std::istream& ist, std::ostream& ost) const
+    {
         while (eval->resteQuestions())
         {
-            std::string donnee("");
             const auto& q = eval->questionCourante();
-
-            std::cout << q->contenu() << std::endl;
-            std::cout << "Entrez votre réponse : "; // TODO gérer les accents
-            std::getline(std::cin, donnee); // on utilise un getline pour avoir toute la ligne
+            ost << q->contenu() << std::endl;
+            std::string donnee = lireReponse(ist, ost);
             reponse rep{donnee};
+            traiterReponse(q, rep);
 
-            // TODO utiliser la classe réponse ici
-            if (q->reponseJuste(donnee))
+            if (rep.valide())
             {
                 eval->incrementeBonnesReponses();
-                std::cout << "Bonne réponse !" << std::endl;
-
-                if (evalSeconde)
-                    evalSeconde->marquerReussite(); // TODO manque l'indice courant
+                ost << "Bonne réponse !" << std::endl;
+                eval->reussiteCourante();
             }
             else
             {
-                std::cout << "Mauvaise réponse." << std::endl;
-
-                if (evalSeconde) {
-                    evalSeconde->marquerEchec();
-                }
-                else if (evalAdapt) {
-                    evalAdapt->marquerEchec();
-                }
+                ost << "Mauvaise réponse." << std::endl;
+                eval->echecCourant();
             }
-
-            if (eval->afficherBonneReponse())
-            {
-                std::cout << q->reponse() << std::endl; // TODO fonction virtuelle dans question.h faite par Surab et Quentin
-            }
-
+            afficherCorrectionSecondeChance(eval, q, ost);
             eval->questionSuivante();
         }
-        std::cout << std::endl << "=== RÉSULTATS ===" << std::endl;
-        std::cout << "Note finale : " << eval->resultats() << "/20" << std::endl;
-        std::cout << "Bonnes réponses : " << eval->bonnesReponses() << '/' << eval->nbQuestions() << std::endl;
+        afficherResultats(eval, ost);
     }
+
+    std::string gestionnaireEvaluation::lireReponse(std::istream& ist, std::ostream& ost) const
+    {
+        std::string donnee("");
+        ost << "Entrez votre réponse : ";
+        std::getline(ist, donnee);
+        return donnee;
+    }
+
+    void gestionnaireEvaluation::traiterReponse(const std::unique_ptr<sujet::question> &q, reponse &rep) const
+    {
+        rep.changeValidite(q->reponseJuste(rep.donnee()));
+    }
+
+    void gestionnaireEvaluation::afficherCorrectionSecondeChance(std::unique_ptr<evaluation>& eval, std::unique_ptr<sujet::question>& q, std::ostream& ost) const
+    {
+        if (eval->afficherBonneReponse())
+        {
+            ost << q->reponse() << std::endl; // TODO fonction virtuelle dans question.h faite par Surab et Quentin
+        }
+    }
+
+    void gestionnaireEvaluation::afficherResultats(std::unique_ptr<evaluation>& eval, std::ostream &ost) const
+    {
+        ost << std::endl << "=== RÉSULTATS ===" << std::endl;
+        ost << "Note finale : " << eval->resultats() << "/20" << std::endl;
+        ost << "Bonnes réponses : " << eval->bonnesReponses() << '/' << eval->nbQuestions() << std::endl;
+    }
+
 }

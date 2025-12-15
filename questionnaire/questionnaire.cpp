@@ -28,6 +28,11 @@ namespace sujet
     {
         return d_questions.size();
     }
+    void questionnaire::modifierNom(const std::string& nomFichier)
+    {
+        d_nomFichier=nomFichier;
+    }
+
 
 
 
