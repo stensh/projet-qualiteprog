@@ -1,7 +1,6 @@
 #ifndef PROJET_QUALITEPROG_APPRENTISSAGE_H
 #define PROJET_QUALITEPROG_APPRENTISSAGE_H
 
-#include <iostream>
 #include "questionnaire/questionnaire.h"
 
 namespace revision
