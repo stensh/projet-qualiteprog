@@ -18,6 +18,7 @@ namespace test
 
         // Méthodes surchargées
         const std::unique_ptr<sujet::question>& questionCourante() const override;
+        void echecCourant() override;
         bool resteQuestions() const override;
         bool afficherBonneReponse() const override;
         void questionSuivante() override;

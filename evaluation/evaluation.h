@@ -25,6 +25,8 @@ namespace test
         // Méthodes virtuelles pures
         virtual const std::unique_ptr<sujet::question>& questionCourante() const = 0;
             // virtuelle car on change l'approche de question courante pour chaque type d'évaluation
+        virtual void reussiteCourante() = 0;
+        virtual void echecCourant() = 0;
         virtual bool resteQuestions() const = 0;
         virtual bool afficherBonneReponse() const = 0;
         virtual void questionSuivante() = 0;

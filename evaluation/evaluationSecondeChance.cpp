@@ -18,6 +18,16 @@ namespace test
         return questionnaire().questionIndice(indiceReel);
     }
 
+    void evaluationSecondeChance::reussiteCourante()
+    {
+        marquerReussite();
+    }
+
+    void evaluationSecondeChance::echecCourant()
+    {
+        marquerEchec();
+    }
+
     bool evaluationSecondeChance::resteQuestions() const
     {
         return d_positionCourante < d_toutesLesQuestions.size();

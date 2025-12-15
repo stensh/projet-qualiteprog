@@ -13,7 +13,7 @@ namespace revision
         {
             ost << q.questionIndice(i)->contenu() << std::endl;
             // TODO attendre une action de l'utilisateur
-            ost << // quest.questionCourante()->reponse() << std::endl
+            ost << q.questionIndice(i)->reponse() << std::endl;
         }
     }
 

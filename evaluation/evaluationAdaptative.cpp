@@ -28,6 +28,11 @@ namespace test
         return questionnaire().questionIndice(indiceReel);
     }
 
+    void evaluationAdaptative::echecCourant()
+    {
+        marquerEchec();
+    }
+
     bool evaluationAdaptative::resteQuestions() const
     {
         return d_positionOrdre < d_ordreQuestions.size();

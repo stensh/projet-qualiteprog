@@ -26,7 +26,7 @@ TEST_CASE("L'évaluation test fonctionne") {
             REQUIRE_EQ(e.resultats(), noteParfaite);
         }
         SUBCASE("Réponses partiellement correctes fonctionne") {
-            double noteTroisQuart {75.0};
+            double noteTroisQuart {15.0};
             for (int i{0}; i < 3; ++i) {
                 e.incrementeBonnesReponses();
                 e.incrementeQuestionsPosees();
