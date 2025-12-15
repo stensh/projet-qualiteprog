@@ -1,4 +1,6 @@
 #include <random>
+#include <chrono>
+#include <algorithm>
 #include "evaluationAdaptative.h"
 
 namespace test
