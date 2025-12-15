@@ -1,1 +1,23 @@
+#include <string>
+#include "doctest.h"
+#include "../../questionnaire/questionnaire.h"
+#include "../evaluationSecondeChance
 
+TEST_CASE("L'évaluation seconde chance focntionne")
+{
+  sujet::questionnaire q{fichierTest.txt};
+  test::evaluationSecondeChance e{q};
+  SUBCASE("Reposer une question échoué fonctionne")
+  {
+    const std::string premiere_question = e.questionCourante()->contenu();
+    e.marquerEchec();
+    e.questionSuivante();
+    REQUIRE_UNARY(e.resteQuestions());
+    REQUIRE_EQ(e.questionCourante()->contenu(), premiere_question);
+    REQUIRE_UNARY_FALSE(e.afficherBonneReponse());
+  }
+
+
+
+
+}
