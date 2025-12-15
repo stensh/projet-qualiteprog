@@ -25,6 +25,15 @@ TEST_CASE("L'évaluation seconde chance focntionne")
       e.questionSuivante();
       REQUIRE_EQ(e.resultats(), noteParfaite);
     }
+    SUBCASE("Le calcule avec un échec et un deuxième essai réussi fonctionne")
+    {
+      double notePasParfaite{15.0};
+      e.marquerEchec();
+      e.questionSuivante();
+      e.incrementeBonnesReponses();
+      e.questionsSuivante();  
+      REQUIRE_EQ(e.resultats(), notePasParfaite);
+    } 
   }
 
 
