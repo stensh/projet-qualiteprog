@@ -5,7 +5,7 @@
 
 TEST_CASE("L'évaluation seconde chance focntionne")
 {
-  sujet::questionnaire q{fichierTest.txt};
+  sujet::questionnaire q{"fichierTest.txt"};
   test::evaluationSecondeChance e{q};
   SUBCASE("Reposer une question échoué fonctionne")
   {
