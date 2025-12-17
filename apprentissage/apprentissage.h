@@ -9,8 +9,7 @@ namespace revision
     class apprentissage
     {
     public:
-        apprentissage() = default;
-        ~apprentissage() = default;
+        apprentissage() = delete ;
         void static commencer(const sujet::questionnaire &q, std::ostream &ost,std::istream& ist );
     private:
         void static attendreEntree(std::ostream& ost,std::istream& ist);

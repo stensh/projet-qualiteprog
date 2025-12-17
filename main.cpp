@@ -18,8 +18,7 @@ void chargerQuestionnaire(sujet::questionnaire& q,int& code)
 
 void apprendreQuestionnaire(const sujet::questionnaire& q)
 {
-    revision::apprentissage apprend{};
-    apprend.commencer(q,std::cout,std::cin);
+    revision::apprentissage::commencer(q,std::cout,std::cin);
 }
 
 int menu()
