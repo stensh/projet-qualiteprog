@@ -16,13 +16,10 @@ void chargerQuestionnaire(sujet::questionnaire& q,int& code)
     gestQ.chargeQuestionnaire(q,code);
 }
 
-void apprendreQuestionnaire(sujet::questionnaire& q)
+void apprendreQuestionnaire(const sujet::questionnaire& q)
 {
-    std::cout << std::endl << "Je suis bien dans la fonction" << std::endl;
-    revision::apprentissage apprend{q,std::cout};
-    apprend.commencer(q,std::cout);
-    std::cout << q.taille();
-    std::cout << std::endl << "Je suis bien sorti de la fonction" << std::endl;
+    revision::apprentissage apprend{};
+    apprend.commencer(q,std::cout,std::cin);
 }
 
 int menu()
@@ -53,8 +50,8 @@ void run()
     {
         switch (menu())
         {
-        case 1:chargerQuestionnaire(quest,code);std::cout <<std::endl<<"Voici le code de retour "<<code <<" " <<quest.taille()<< std::endl; break;
-        case 2:apprendreQuestionnaire(quest);std::cout << std::endl <<"LE DEUXIEME TEST"<< code << std::endl; break;
+        case 1:chargerQuestionnaire(quest,code); break;
+        case 2:apprendreQuestionnaire(quest); break;
         case 3:/* Afficher une liste des différentes évaluations*/ break;
         default: goOn=false;
         }
@@ -63,7 +60,7 @@ void run()
 
 int main()
 {
-    SetConsoleOutputCP(CP_UTF81);
+    SetConsoleOutputCP(CP_UTF8);
     std::cout << "Test de compilation" << std::endl;
     run();
     return 0;
