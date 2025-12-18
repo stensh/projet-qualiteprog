@@ -46,19 +46,19 @@ std::unique_ptr<questionChoixMultiples> gestionnaireQuestionnaire::lireQuestionC
 bool gestionnaireQuestionnaire::valideEntete(std::istream &fichier)
 {
     std::string balise;
-    std::getline(fichier, balise);
+    getline(fichier, balise);
     if (balise != ENTETE_FICHIER)
     {
         return false;
     }
-    std::getline(fichier, balise);
+    getline(fichier, balise);
     return balise=="{";
 }
 
 void gestionnaireQuestionnaire::analyseQuestions(questionnaire &ques, std::istream &fichier, int &code)
 {
     std::string balise;
-    while (std::getline(fichier,balise) and balise!="}")    //A demander au prof.
+    while (getline(fichier,balise) and balise!="}")    //A demander au prof.
     {
         auto question = creeQuestion(balise, fichier);
         if (question!=nullptr)

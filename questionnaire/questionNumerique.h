@@ -18,7 +18,7 @@ class questionNumerique: public question
         bool reponseJuste(const std::string& reponse) const override;
 
     private:
-        int  d_limMin, d_limMax;
+        int  d_limiteMin, d_limiteMax;
 };
 
 }

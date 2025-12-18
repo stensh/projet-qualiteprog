@@ -13,6 +13,8 @@ namespace sujet
     class questionnaire
     {
     public:
+        questionnaire();
+
         //Constructeur et destructeur
         questionnaire(const std::string& nomFichier);
         ~questionnaire() = default ;
@@ -20,6 +22,7 @@ namespace sujet
         //Méthode de la classe
         void ajouteQuestion(std::unique_ptr<question> q);
         const std::unique_ptr<question>& questionIndice(int indice) const;    //Renvoie la question demandée indice.
+        void modifierNom(const std::string& nomFichier);
         std::string nomFichier() const;
         int taille() const;
 

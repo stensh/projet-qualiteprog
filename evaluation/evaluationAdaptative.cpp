@@ -1,5 +1,7 @@
 #include <random>
 #include "evaluationAdaptative.h"
+#include <chrono>
+#include <algorithm>
 
 namespace test
 {
@@ -35,7 +37,7 @@ namespace test
 
     bool evaluationAdaptative::afficherBonneReponse() const
     {
-        // TODO lire l'énoncé
+        return false;
     }
 
     void evaluationAdaptative::questionSuivante()
