@@ -4,40 +4,26 @@
 
 namespace test
 {
-    gestionnaireEvaluation::gestionnaireEvaluation()
-    {}
-
-    gestionnaireEvaluation::~gestionnaireEvaluation()
-    {}
-
-    void gestionnaireEvaluation::commencerEvaluation(std::unique_ptr<evaluation> eval) const
+    void gestionnaireEvaluation::commencerEvaluation(evaluation& eval) const
     {
         commencerEvaluation(eval, std::cin, std::cout);
     }
 
-    void gestionnaireEvaluation::commencerEvaluation(std::unique_ptr<evaluation> eval, std::istream& ist, std::ostream& ost) const
+    void gestionnaireEvaluation::commencerEvaluation(evaluation& eval, std::istream& ist, std::ostream& ost) const
     {
-        while (eval->resteQuestions())
+        while (eval.resteQuestions())
         {
-            const auto& q = eval->questionCourante();
-            ost << q->contenu() << std::endl;
+            const auto& q = *eval.questionCourante(); // à revoir
+            ost << q.contenu() << std::endl;
+
             std::string donnee = lireReponse(ist, ost);
             reponse rep{donnee};
             traiterReponse(q, rep);
 
-            if (rep.valide())
-            {
-                eval->incrementeBonnesReponses();
-                ost << "Bonne réponse !" << std::endl;
-                eval->reussiteCourante();
-            }
-            else
-            {
-                ost << "Mauvaise réponse." << std::endl;
-                eval->echecCourant();
-            }
+            rep.valide() ? instructionsReponseValide(eval, ost) : instructionsReponseInvalide(eval, ost);
+
             afficherCorrectionSecondeChance(eval, q, ost);
-            eval->questionSuivante();
+            eval.questionSuivante();
         }
         afficherResultats(eval, ost);
     }
@@ -50,24 +36,37 @@ namespace test
         return donnee;
     }
 
-    void gestionnaireEvaluation::traiterReponse(const std::unique_ptr<sujet::question> &q, reponse &rep) const
+    void gestionnaireEvaluation::traiterReponse(const sujet::question& q, reponse &rep) const
     {
-        rep.changeValidite(q->reponseJuste(rep.donnee()));
+        rep.changeValidite(q.reponseJuste(rep.donnee()));
     }
 
-    void gestionnaireEvaluation::afficherCorrectionSecondeChance(std::unique_ptr<evaluation>& eval, std::unique_ptr<sujet::question>& q, std::ostream& ost) const
+    void gestionnaireEvaluation::instructionsReponseValide(evaluation &eval, std::ostream &ost) const
     {
-        if (eval->afficherBonneReponse())
+        eval.incrementeBonnesReponses();
+        ost << "Bonne réponse !" << std::endl;
+        eval.reussiteCourante();
+    }
+
+    void gestionnaireEvaluation::instructionsReponseInvalide(evaluation& eval, std::ostream& ost) const
+    {
+        ost << "Mauvaise réponse." << std::endl;
+        eval.echecCourant();
+    }
+
+    void gestionnaireEvaluation::afficherCorrectionSecondeChance(const evaluation& eval, const sujet::question& q, std::ostream& ost) const
+    {
+        if (eval.afficherBonneReponse())
         {
-            ost << q->reponse() << std::endl; // TODO fonction virtuelle dans question.h faite par Surab et Quentin
+            ost << q.reponse() << std::endl; // TODO fonction virtuelle dans question.h faite par Surab et Quentin
         }
     }
 
-    void gestionnaireEvaluation::afficherResultats(std::unique_ptr<evaluation>& eval, std::ostream &ost) const
+    void gestionnaireEvaluation::afficherResultats(evaluation& eval, std::ostream &ost) const
     {
         ost << std::endl << "=== RÉSULTATS ===" << std::endl;
-        ost << "Note finale : " << eval->resultats() << "/20" << std::endl;
-        ost << "Bonnes réponses : " << eval->bonnesReponses() << '/' << eval->nbQuestions() << std::endl;
+        ost << "Note finale : " << eval.resultats() << "/20" << std::endl;
+        ost << "Bonnes réponses : " << eval.bonnesReponses() << '/' << eval.nbQuestions() << std::endl;
     }
 
 }

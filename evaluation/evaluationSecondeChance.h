@@ -21,14 +21,16 @@ namespace test
 
         // Méthodes surchargées
         const std::unique_ptr<sujet::question>& questionCourante() const override;
+        void reussiteCourante() override;
+        void echecCourant() override;
         bool resteQuestions() const override;
         bool afficherBonneReponse() const override; // Affichage au bout du deuxième échec
         void questionSuivante() override;
         double resultats() const override;
 
         // Méthodes propres à la classe
-        void marquerReussite(int indice);
-        void marquerEchec(int indice);
+        void marquerReussite();
+        void marquerEchec();
 
     private:
         int d_positionCourante; // Position actuelle dans le tableau d'indices

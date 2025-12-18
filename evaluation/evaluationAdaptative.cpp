@@ -1,4 +1,6 @@
 #include <random>
+#include <chrono>
+#include <algorithm>
 #include "evaluationAdaptative.h"
 #include <chrono>
 #include <algorithm>
@@ -30,6 +32,11 @@ namespace test
         return questionnaire().questionIndice(indiceReel);
     }
 
+    void evaluationAdaptative::echecCourant()
+    {
+        marquerEchec();
+    }
+
     bool evaluationAdaptative::resteQuestions() const
     {
         return d_positionOrdre < d_ordreQuestions.size();
@@ -47,7 +54,7 @@ namespace test
         ++d_positionOrdre;
     }
 
-    double evaluationAdaptative::resultats() const // TODO mettre ça dans une fonction commune non ?
+    double evaluationAdaptative::resultats() const
     {
         if (d_nbEssais == 0) return 0.0;
         return bonnesReponses() * 20.0 / d_nbEssais;

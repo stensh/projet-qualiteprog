@@ -17,7 +17,11 @@ add_executable(main
         evaluation/evaluationTest.h
         evaluation/evaluationTest.cpp
         evaluation/gestionnaireEvaluation.h
-        evaluation/gestionnaireEvaluation.cpp)
+        evaluation/gestionnaireEvaluation.cpp
+        evaluation/testsDoctest/test_evaluation.cpp
+        evaluation/testsDoctest/test_evaluationTest.cpp
+        evaluation/testsDoctest/test_evaluationAdaptative.cpp
+        evaluation/testsDoctest/test_gestionnaireEvaluation.cpp)
 
 # Questionnaire
 add_executable(projet_qualiteprog
