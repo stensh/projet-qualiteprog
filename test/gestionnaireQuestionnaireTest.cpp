@@ -86,9 +86,9 @@ TEST_CASE("Test de la fonction lireQuestionNum")
     }
 }
 
-TEST_CASE("Test de la fonction lireQuestionNum")
+TEST_CASE("Test de la fonction lireQuestionTxt")
 {
-    SUBCASE("Lecture correcte d'une question numérique")
+    SUBCASE("Lecture correcte d'une question texte")
     {
         sujet::gestionnaireQuestionnaire gq{};
         std::istringstream fichier("Catégorie\n"
@@ -155,9 +155,9 @@ TEST_CASE("Test de la fonction analyseQuestions")
     sujet::gestionnaireQuestionnaire gq{};
     int code;
     std::string nomFichier = {};
+    sujet::questionnaire q{nomFichier};
     SUBCASE("Analyse réussie avec plusieurs questions")
     {
-        sujet::questionnaire q{nomFichier};
         std::istringstream fichier("[QT]\n"
                                     "Cat1\n"
                                     "Question 1\n"
@@ -173,7 +173,6 @@ TEST_CASE("Test de la fonction analyseQuestions")
 
     SUBCASE("Analyse échouée avec balise invalide")
     {
-        sujet::questionnaire q{nomFichier};
         std::istringstream fichier("[QX]\n"
                                     "Cat1\n"
                                     "Question 1\n"
@@ -184,22 +183,34 @@ TEST_CASE("Test de la fonction analyseQuestions")
 
     SUBCASE("Analyse d'un questionnaire vide")
     {
-        sujet::questionnaire q{nomFichier};
         std::istringstream fichier("}\n");
         gq.analyseQuestions(q, fichier, code);
         REQUIRE_EQ(code, 0);
     }
 }
 
-TEST_CASE("Test d'intégration - Chargement complet")
+TEST_CASE("Chargement d'un questionnaire complet valide")
 {
-    SUBCASE("Chargement d'un questionnaire complet valide")
+    std::string nomFichier = "../test/QuestionnaireDoctestCode0.txt";
+    sujet::questionnaire q{nomFichier};
+    sujet::gestionnaireQuestionnaire gq;
+    int code;
+    gq.chargeQuestionnaire(q,code);
+    REQUIRE_EQ(code, 0);
+}
+
+TEST_CASE("Test la taille d'un questionnaire")
+{
+    SUBCASE("Taille par défaut égal 0")
     {
-        std::string nomFichier = "../test/QuestionnaireDoctestCode0.txt";
-        sujet::questionnaire q{nomFichier};
-        sujet::gestionnaireQuestionnaire gq;
-        int code;
-        gq.chargeQuestionnaire(q,code);
-        REQUIRE_EQ(code, 0);
+        sujet::questionnaire q{};
+        REQUIRE_EQ(q.taille(), 0);
+    }
+    SUBCASE("Taille augmente après ajout de question")
+    {
+        sujet::questionnaire q{};
+        auto qTexte(std::make_unique<sujet::questionTexte>("intitule", "texte", "reponse"));
+        q.ajouteQuestion(std::move(qTexte));
+        REQUIRE_EQ(q.taille(), 1);
     }
 }
