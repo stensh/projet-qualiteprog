@@ -1,8 +1,8 @@
 #include <string>
-#include "doctest.h"
-#include "../../questionnaire/questionnaire.h"
-#include "../../questionnaire/questionTexte.h"
-#include "../evaluationAdaptative.h"
+#include "../evaluation/testsDoctest/doctest.h"
+#include "../questionnaire/questionnaire.h"
+#include "../questionnaire/questionTexte.h"
+#include "../evaluation/evaluationAdaptative.h"
 
 TEST_CASE("L'évaluation adaptative fonctionne") {
     sujet::questionnaire q{""};

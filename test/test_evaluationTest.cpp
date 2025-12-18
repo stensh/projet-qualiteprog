@@ -1,7 +1,7 @@
-#include "doctest.h"
-#include "../../questionnaire/questionnaire.h"
-#include "../../questionnaire/questionTexte.h"
-#include "../evaluationTest.h"
+#include "../evaluation/testsDoctest/doctest.h"
+#include "../questionnaire/questionnaire.h"
+#include "../questionnaire/questionTexte.h"
+#include "../evaluation/evaluationTest.h"
 
 TEST_CASE("L'évaluation test fonctionne") {
     sujet::questionnaire q{""};

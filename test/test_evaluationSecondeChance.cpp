@@ -1,7 +1,7 @@
 #include <string>
-#include "doctest.h"
-#include "../../questionnaire/questionnaire.h"
-#include "../evaluationSecondeChance
+#include "../evaluation/testsDoctest/doctest.h"
+#include "../questionnaire/questionnaire.h"
+#include "../evaluation/evaluationSecondeChance.h"
 
 TEST_CASE("L'évaluation seconde chance focntionne")
 {
@@ -45,7 +45,4 @@ TEST_CASE("L'évaluation seconde chance focntionne")
       REQUIRE_EQ(e.resultats(), noteNulle);
     }
   }
-
-
-
 }

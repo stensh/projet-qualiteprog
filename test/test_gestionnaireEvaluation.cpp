@@ -1,11 +1,11 @@
 #include <sstream>
-#include "doctest.h"
-#include "../../questionnaire/questionnaire.h"
-#include "../../questionnaire/questionTexte.h"
-#include "../evaluationTest.h"
-#include "../evaluationSecondeChance.h"
-#include "../evaluationAdaptative.h"
-#include "../gestionnaireEvaluation.h"
+#include "../evaluation/testsDoctest/doctest.h"
+#include "../questionnaire/questionnaire.h"
+#include "../questionnaire/questionTexte.h"
+#include "../evaluation/evaluationTest.h"
+#include "../evaluation/evaluationSecondeChance.h"
+#include "../evaluation/evaluationAdaptative.h"
+#include "../evaluation/gestionnaireEvaluation.h"
 
 TEST_CASE("Le gestionnaire d'évaluation fonctionne") {
     sujet::questionnaire q{""};
