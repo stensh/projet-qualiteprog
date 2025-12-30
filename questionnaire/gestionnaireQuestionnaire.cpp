@@ -60,7 +60,7 @@ bool gestionnaireQuestionnaire::valideEntete(std::istream &fichier)
 void gestionnaireQuestionnaire::analyseQuestions(questionnaire &ques, std::istream &fichier, int &code)
 {
     std::string balise;
-    while (getline(fichier,balise) and balise!="}")    //A demander au prof.
+    while (getline(fichier,balise) and balise!="}")
     {
         auto question = creeQuestion(balise, fichier);
         if (question!=nullptr)
@@ -74,8 +74,10 @@ void gestionnaireQuestionnaire::analyseQuestions(questionnaire &ques, std::istre
     }
     if (balise == "}")
         code = 0;
-    else
+    else {
         code = 3;
+        vider(ques);
+    }
 }
 
 std::unique_ptr<question> gestionnaireQuestionnaire::creeQuestion(const std::string& balise, std::istream &fichier)
@@ -97,6 +99,7 @@ std::unique_ptr<question> gestionnaireQuestionnaire::creeQuestion(const std::str
 
 void gestionnaireQuestionnaire::chargeQuestionnaire(questionnaire& quest, int &code)
 {
+    vider(quest);
     std::ifstream fichier(quest.nomFichier());
     if (!fichier)
     {
