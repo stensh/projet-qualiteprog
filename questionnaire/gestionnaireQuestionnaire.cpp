@@ -74,7 +74,8 @@ void gestionnaireQuestionnaire::analyseQuestions(questionnaire &ques, std::istre
     }
     if (balise == "}")
         code = 0;
-    else {
+    else
+    {
         code = 3;
         vider(ques);
     }
