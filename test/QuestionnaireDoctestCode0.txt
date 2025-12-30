@@ -5,15 +5,15 @@ Culture générale
 Quelle est le vrai nom de "The rock" ?
 Dwan johnson
 [QCM]
-Evidence
-Pourquoi je te suis supérieur ?
-1. Je suis plus beau
-2. Je suis plus fort
-3. Je suis plus intelligent
-4. Pour toutes les raisons citées précédemment
+Physique
+Pourquoi la Terre est ronde ?
+1. A cause de la gravité
+2. Elle est plate
+3. A cause de sa rotation sue elle-même
+4. Aucune de ces réponses
 4
 [QN]
 Culture générale
 Quelle est le diamètre de la terre
-5900 6100
+6200 6500
 }
