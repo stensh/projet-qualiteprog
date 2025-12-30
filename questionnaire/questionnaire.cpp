@@ -34,6 +34,10 @@ namespace sujet
     {
         d_nomFichier=nomFichier;
     }
+    void questionnaire::videQuestionnaire() {
+        d_questions.clear();
+    }
+
 
 
 

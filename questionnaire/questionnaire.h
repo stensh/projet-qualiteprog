@@ -25,6 +25,7 @@ namespace sujet
         void modifierNom(const std::string& nomFichier);
         std::string nomFichier() const;
         int taille() const;
+        void videQuestionnaire();
 
     private:
         std::vector<std::unique_ptr<question>> d_questions; //Stock les différentes questions du questionnaire

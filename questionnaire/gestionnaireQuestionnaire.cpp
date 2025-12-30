@@ -1,6 +1,8 @@
 #include <fstream>
 #include "gestionnaireQuestionnaire.h"
 
+#include <iostream>
+
 namespace sujet
 {
 
@@ -110,5 +112,9 @@ void gestionnaireQuestionnaire::chargeQuestionnaire(questionnaire& quest, int &c
     }
 }
 
+void gestionnaireQuestionnaire::vider(questionnaire &quest) const
+{
+    quest.videQuestionnaire();
+}
 
 }

@@ -34,6 +34,8 @@ class gestionnaireQuestionnaire
         std::unique_ptr<questionTexte> lireQuestionTxt(std::istream& fichier);
         std::unique_ptr<questionChoixMultiples> lireQuestionChoixMultiples(std::istream& fichier);
 
+        void vider(questionnaire& quest) const;
+
 
     private:
         inline static const std::string ENTETE_FICHIER = "CECI EST UN QUESTIONNAIRE";   //A REVOIR
