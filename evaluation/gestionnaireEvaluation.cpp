@@ -43,7 +43,6 @@ namespace test
 
     void gestionnaireEvaluation::instructionsReponseValide(evaluation &eval, std::ostream &ost) const
     {
-        eval.incrementeBonnesReponses();
         ost << "Bonne réponse !" << std::endl;
         eval.reussiteCourante();
     }

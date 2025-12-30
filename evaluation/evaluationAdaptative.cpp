@@ -29,7 +29,12 @@ namespace test
     const std::unique_ptr<sujet::question> &evaluationAdaptative::questionCourante() const
     {
         int indiceReel{d_ordreQuestions[d_positionOrdre]}; // retrouve l'indice réel de la question
-        return questionnaire().questionIndice(indiceReel);
+        return questionnaireCourant().questionIndice(indiceReel);
+    }
+
+    void evaluationAdaptative::reussiteCourante()
+    {
+        incrementeBonnesReponses();
     }
 
     void evaluationAdaptative::echecCourant()

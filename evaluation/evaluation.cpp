@@ -31,7 +31,7 @@ namespace test
         ++d_nbQuestionsPosees;
     }
 
-    const sujet::questionnaire &evaluation::questionnaire() const
+    const sujet::questionnaire &evaluation::questionnaireCourant() const
     {
         return d_questionnaire;
     }

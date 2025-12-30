@@ -31,7 +31,7 @@ TEST_CASE("L'évaluation seconde chance focntionne")
       e.marquerEchec();
       e.questionSuivante();
       e.incrementeBonnesReponses();
-      e.questionsSuivante();  
+      e.questionSuivante();
       REQUIRE_EQ(e.resultats(), notePasParfaite);
     } 
     SUBCASE("Le calcule avec double échec fonctionne")

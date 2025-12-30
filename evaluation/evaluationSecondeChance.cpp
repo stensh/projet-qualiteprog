@@ -15,11 +15,12 @@ namespace test
     const std::unique_ptr<sujet::question> &evaluationSecondeChance::questionCourante() const
     {
         int indiceReel = d_toutesLesQuestions[d_positionCourante];
-        return questionnaire().questionIndice(indiceReel);
+        return questionnaireCourant().questionIndice(indiceReel);
     }
 
     void evaluationSecondeChance::reussiteCourante()
     {
+        incrementeBonnesReponses();
         marquerReussite();
     }
 

@@ -8,7 +8,17 @@ namespace test
 
     const std::unique_ptr<sujet::question> &evaluationTest::questionCourante() const
     {
-        return questionnaire().questionIndice(d_indiceCourant);
+        return questionnaireCourant().questionIndice(d_indiceCourant);
+    }
+
+    void evaluationTest::reussiteCourante()
+    {
+        incrementeBonnesReponses();
+    }
+
+    void evaluationTest::echecCourant()
+    {
+
     }
 
     bool evaluationTest::afficherBonneReponse() const
