@@ -14,6 +14,6 @@ Pourquoi la Terre est ronde ?
 4
 [QN]
 Culture générale
-Quelle est le diamètre de la terre
+Quel est le diamètre de la terre
 6200 6500
 }
