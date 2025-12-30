@@ -13,7 +13,7 @@ namespace test
     {
         while (eval.resteQuestions())
         {
-            const auto& q = *eval.questionCourante(); // à revoir
+            const auto& q = *eval.questionCourante();
             ost << q.contenu() << std::endl;
 
             std::string donnee = lireReponse(ist, ost);
@@ -57,7 +57,7 @@ namespace test
     {
         if (eval.afficherBonneReponse())
         {
-            ost << q.reponse() << std::endl; // TODO fonction virtuelle dans question.h faite par Surab et Quentin
+            ost << q.reponse() << std::endl;
         }
     }
 
