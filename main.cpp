@@ -1,6 +1,8 @@
 #include <iostream>
 #include <limits>
+#ifdef _WIN32
 #include <windows.h>
+#endif
 
 #include "apprentissage/apprentissage.h"
 #include "evaluation/evaluationTest.h"
@@ -140,7 +142,9 @@ void run()
 
 int main()
 {
+    #ifdef _WIN32
     SetConsoleOutputCP(CP_UTF8);
+    #endif
     run();
     return 0;
 }
