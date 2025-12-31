@@ -214,3 +214,24 @@ TEST_CASE("Test la taille d'un questionnaire")
         REQUIRE_EQ(q.taille(), 1);
     }
 }
+
+TEST_CASE("Vider un questionnaire fonctionne")
+{
+    sujet::gestionnaireQuestionnaire gq{};
+    sujet::questionnaire q{};
+
+    SUBCASE("Vider un questionnaire vide fonctionne")
+    {
+        gq.vider(q);
+        REQUIRE_EQ(q.taille(), 0);
+    }
+
+    SUBCASE("Vider un questionnaire avec des questions fonctionne")
+    {
+        q.ajouteQuestion(std::make_unique<sujet::questionTexte>("intitule", "texte", "reponse"));
+        q.ajouteQuestion(std::make_unique<sujet::questionNumerique>("intitule2", "texte2", 10, 20));
+        REQUIRE_EQ(q.taille(), 2);
+        gq.vider(q);
+        REQUIRE_EQ(q.taille(), 0);
+    }
+}
