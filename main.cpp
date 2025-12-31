@@ -23,9 +23,12 @@ void chargerQuestionnaire(sujet::questionnaire& q)
     gestQ.chargeQuestionnaire(q,code);
     switch(code)
     {
-        case 1: std::cout<<"Le fichier n'a pu être ouvert, il est possible que celui-ci n'existe pas. Essayé un autre fichier :"<<std::endl; break;
-        case 2: std::cout<<"Le fichier n'est pas un fichier questionnaire, essayé un autre fichier :"<<std::endl; break;
-        case 3: std::cout<<"Une erreur est survenu lors de la lecture du fichier, corrigé le fichier ou essayé un autre fichier :"<<std::endl; break;
+        case 1: std::cout<<"Le fichier n'a pas pu être ouvert, il est possible que celui-ci n'existe pas. Essayez avec un autre fichier :"<<std::endl;
+            break;
+        case 2: std::cout<<"Le fichier n'est pas un fichier questionnaire, essayez avec un autre fichier :"<<std::endl;
+            break;
+        case 3: std::cout<<"Une erreur est survenu lors de la lecture du fichier, corrigé le fichier ou essayé un autre fichier :"<<std::endl;
+            break;
     }
 }
 
@@ -34,7 +37,7 @@ void apprendreQuestionnaire(const sujet::questionnaire& q)
     if (q.taille()>0)
         revision::apprentissage::commencer(q,std::cout,std::cin);
     else
-        std::cout<<"Le questionnaire ne contient aucune question"<<std::endl;
+        std::cout<<"Le questionnaire ne contient aucune question."<<std::endl;
 }
 
 int menuPrincipal()
