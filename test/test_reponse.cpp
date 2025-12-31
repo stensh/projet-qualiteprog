@@ -14,8 +14,31 @@ TEST_CASE("La réponse est bien construite et opérationelle")
     }
     SUBCASE("Le changement de validité est opérationnel")
     {
-        bool validite{false};
-        rep.changeValidite(validite);
-        REQUIRE_EQ(rep.valide(),validite);
+        SUBCASE("Changer de false à false")
+        {
+            bool validite{false};
+            rep.changeValidite(validite);
+            REQUIRE_EQ(rep.valide(),validite);
+        }
+        SUBCASE("Changer de false à true")
+        {
+            bool validite{true};
+            rep.changeValidite(validite);
+            REQUIRE_EQ(rep.valide(),validite);
+        }
+        SUBCASE("Changer de true à false")
+        {
+            rep.changeValidite(true);
+            REQUIRE_UNARY(rep.valide());
+            rep.changeValidite(false);
+            REQUIRE_FALSE(rep.valide());
+        }
+        SUBCASE("Changer de true à true")
+        {
+            rep.changeValidite(true);
+            REQUIRE_UNARY(rep.valide());
+            rep.changeValidite(true);
+            REQUIRE_UNARY(rep.valide());
+        }
     }
 }
