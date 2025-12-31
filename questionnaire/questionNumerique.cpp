@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "questionnaire/questionNumerique.h"
 
 namespace sujet
@@ -23,7 +24,19 @@ std::string questionNumerique::reponse() const
 }
 
 bool questionNumerique::reponseJuste(const std::string& reponse)const
-{   int reponseInt= std::stoi(reponse);
-    return reponseInt >= limiteMin() && reponseInt <= limiteMax();
+{
+    try
+    {
+        int reponseInt = std::stoi(reponse);
+        return reponseInt >= limiteMin() && reponseInt <= limiteMax();
+    }
+    catch (const std::invalid_argument&)
+    {
+        return false;   // La chaîne ne peut pas être convertie en nombre
+    }
+    catch (const std::out_of_range&)
+    {
+        return false;   //Le nombre dépasse la limite d'un int
+    }
 }
 }

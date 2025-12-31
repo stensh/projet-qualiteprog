@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "questionnaire/questionChoixMultiples.h"
 
 namespace sujet
@@ -14,8 +15,19 @@ std::string questionChoixMultiples::reponse() const
 
 bool questionChoixMultiples::reponseJuste(const std::string& rep)const
 {
-    int reponseInt = std::stoi(rep);
-    return reponseInt == d_bonneReponse;
+    try
+    {
+        int reponseInt = std::stoi(rep);
+        return reponseInt == d_bonneReponse;
+    }
+    catch(const std::invalid_argument& )
+    {
+        return false;   //La chaine ne peut pas être convertie en nombre
+    }
+    catch(const std::out_of_range& )
+    {
+        return false;   //Le nombre dépasse la limite d'un int
+    }
 }
 
 }
