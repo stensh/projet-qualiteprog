@@ -2,8 +2,6 @@
 #include <chrono>
 #include <algorithm>
 #include "evaluationAdaptative.h"
-#include <chrono>
-#include <algorithm>
 
 namespace test
 {

@@ -40,6 +40,66 @@ void apprendreQuestionnaire(const sujet::questionnaire& q)
         std::cout<<"Le questionnaire ne contient aucune question."<<std::endl;
 }
 
+int menuEvaluation()
+{
+    std::cout<<"Veuillez choisir un type d'évaluation : "<<std::endl;
+    std::cout<<"1. Évaluation test"<<std::endl;
+    std::cout<<"2. Évaluation seconde chance"<<std::endl;
+    std::cout<<"3. Évaluation adaptative"<<std::endl;
+    std::cout<<"4. Retour au menu principal"<<std::endl;
+
+    int n;
+    std::cin>>n;
+    while (std::cin.fail() || n<1 || n>4)
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout<<"L'option saisie n'est pas valide, veuillez reessayer :"<<std::endl;
+        std::cin>>n;
+    }
+    return n;
+}
+
+void commencerEvaluation(const sujet::questionnaire& q)
+{
+    if (q.taille() == 0)
+    {
+        std::cout<<"Le questionnaire ne contient aucune question."<<std::endl;
+        return;
+    }
+
+    int choix = menuEvaluation();
+    if (choix == 4)
+        return;
+
+    // Ignorer le '\n' restant après la lecture du choix
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    test::gestionnaireEvaluation gestEval;
+    
+    switch (choix)
+    {
+        case 1:
+        {
+            test::evaluationTest eval{q};
+            gestEval.commencerEvaluation(eval);
+            break;
+        }
+        case 2:
+        {
+            test::evaluationSecondeChance eval{q};
+            gestEval.commencerEvaluation(eval);
+            break;
+        }
+        case 3:
+        {
+            test::evaluationAdaptative eval{q};
+            gestEval.commencerEvaluation(eval);
+            break;
+        }
+    }
+}
+
 int menuPrincipal()
 {
     std::cout<<"Veuillez choisir une option : "<<std::endl;
@@ -72,7 +132,7 @@ void run()
         {
         case 1:chargerQuestionnaire(quest); break;
         case 2:apprendreQuestionnaire(quest); break;
-        case 3: break; //A faire
+        case 3:commencerEvaluation(quest); break;
         default: goOn=false;
         }
     }

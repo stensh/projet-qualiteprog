@@ -64,8 +64,10 @@ namespace test
     void gestionnaireEvaluation::afficherResultats(evaluation& eval, std::ostream &ost) const
     {
         ost << std::endl << "=== RÉSULTATS ===" << std::endl;
+        ost << "Nombre de questions : " << eval.nbQuestions() << std::endl;
+        ost << "Nombre d'essais : " << eval.questionsPosees() << std::endl;
+        ost << "Nombre de bonnes réponses : " << eval.bonnesReponses() << std::endl;
         ost << "Note finale : " << eval.resultats() << "/20" << std::endl;
-        ost << "Bonnes réponses : " << eval.bonnesReponses() << '/' << eval.nbQuestions() << std::endl;
     }
 
 }
