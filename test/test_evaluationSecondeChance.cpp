@@ -2,6 +2,7 @@
 #include "doctest.h"
 #include "../evaluation/testsDoctest/doctest.h"
 #include "../questionnaire/questionnaire.h"
+#include "../questionnaire/questionTexte.h"
 #include "../evaluation/evaluationSecondeChance.h"
 
 TEST_CASE("L'évaluation seconde chance focntionne")
