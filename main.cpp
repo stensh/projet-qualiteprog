@@ -14,7 +14,7 @@
 
 void chargerQuestionnaire(sujet::questionnaire& q)
 {
-    std::cout << "Veuillez rentrer le nom du questionnaire à charger : "<<std::endl;
+    std::cout << "Veuillez rentrer le chemin d'accès absolue du questionnaire à charger : "<<std::endl;
     std::string nomFichier;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::getline(std::cin, nomFichier); //getline pour entré des noms de fichier avec des espaces
