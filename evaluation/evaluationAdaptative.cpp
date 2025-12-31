@@ -8,7 +8,7 @@
 namespace test
 {
     evaluationAdaptative::evaluationAdaptative(const sujet::questionnaire &q)
-        : evaluation{q}, d_ordreQuestions{}, d_positionOrdre{0}, d_nbEssais{0}
+        : evaluation{q}, d_nbEssais{0}, d_positionOrdre{0}, d_ordreQuestions{}
     {
         melangerQuestions();
     }
