@@ -1,7 +1,5 @@
 #include "evaluation.h"
 
-// test simple
-
 namespace test
 {
     evaluation::evaluation(const sujet::questionnaire& q)
