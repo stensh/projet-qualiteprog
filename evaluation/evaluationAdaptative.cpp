@@ -1,12 +1,13 @@
 #include <random>
 #include <chrono>
 #include <algorithm>
+#include <set>
 #include "evaluationAdaptative.h"
 
 namespace test
 {
     evaluationAdaptative::evaluationAdaptative(const sujet::questionnaire &q)
-        : evaluation{q}, d_nbEssais{0}, d_positionOrdre{0}, d_ordreQuestions{}
+        : evaluation{q}, d_nbEssais{0}, d_positionOrdre{0}, d_ordreQuestions{}, d_questionsAjouteesPourReprise{}, d_phaseReprise{false}
     {
         melangerQuestions();
     }
@@ -33,11 +34,26 @@ namespace test
     void evaluationAdaptative::reussiteCourante()
     {
         incrementeBonnesReponses();
+        // Si on était en phase de reprise et qu'on réussit, on retire la question du set
+        if (d_phaseReprise && d_positionOrdre < static_cast<int>(d_ordreQuestions.size()))
+        {
+            int indiceQuestion = d_ordreQuestions[d_positionOrdre];
+            d_questionsAjouteesPourReprise.erase(indiceQuestion);
+        }
     }
 
     void evaluationAdaptative::echecCourant()
     {
-        marquerEchec();
+        // Si on est en phase de reprise et qu'on échoue, on termine l'évaluation
+        if (d_phaseReprise)
+        {
+            // Vider l'ordre des questions restantes pour que resteQuestions() retourne false
+            d_ordreQuestions.erase(d_ordreQuestions.begin() + d_positionOrdre, d_ordreQuestions.end());
+        }
+        else
+        {
+            marquerEchec();
+        }
     }
 
     bool evaluationAdaptative::resteQuestions() const
@@ -55,6 +71,12 @@ namespace test
         incrementeQuestionsPosees();
         ++d_nbEssais;
         ++d_positionOrdre;
+        
+        // Si toutes les questions initiales ont été posées on passe en phase de reprise
+        if (!d_phaseReprise && d_positionOrdre >= nbQuestions())
+        {
+            d_phaseReprise = true;
+        }
     }
 
     double evaluationAdaptative::resultats() const
@@ -63,10 +85,19 @@ namespace test
         return bonnesReponses() * 20.0 / d_nbEssais;
     }
 
-
     void evaluationAdaptative::marquerEchec()
     {
-        d_ordreQuestions.push_back(d_ordreQuestions[d_positionOrdre]);
+        if (d_positionOrdre < static_cast<int>(d_ordreQuestions.size()))
+        {
+            int indiceQuestion = d_ordreQuestions[d_positionOrdre];
+            
+            // Ajouter la question à la fin seulement si elle n'a pas déjà été ajoutée
+            if (d_questionsAjouteesPourReprise.find(indiceQuestion) == d_questionsAjouteesPourReprise.end())
+            {
+                d_ordreQuestions.push_back(indiceQuestion);
+                d_questionsAjouteesPourReprise.insert(indiceQuestion);
+            }
+        }
     }
 
 }
