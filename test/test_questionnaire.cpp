@@ -60,7 +60,7 @@ TEST_CASE("L'ajout d'une question se déroule normalement")
     }
 }
 
-TEST_CASE("Les questionnaire est bien vidé")
+TEST_CASE("Le questionnaire est bien vidé")
 {
     sujet::questionnaire quest{};
     SUBCASE("Un questionnaire vide est bien vidé")
@@ -73,5 +73,40 @@ TEST_CASE("Les questionnaire est bien vidé")
         quest.ajouteQuestion(std::make_unique<sujet::questionNumerique>("intitule","texte",45,50));
         quest.videQuestionnaire();
         REQUIRE_EQ(quest.taille(),0);
+    }
+}
+
+TEST_CASE("Modifier le nom du questionnaire fonctionne")
+{
+    sujet::questionnaire quest{};
+    SUBCASE("Modifier le nom d'un questionnaire vide")
+    {
+        std::string nouveauNom = "nouveau_fichier.txt";
+        quest.modifierNom(nouveauNom);
+        REQUIRE_EQ(quest.nomFichier(), nouveauNom);
+    }
+    SUBCASE("Modifier le nom d'un questionnaire avec un nom existant")
+    {
+        std::string nomInitial = "ancien_fichier.txt";
+        sujet::questionnaire quest2{nomInitial};
+        std::string nouveauNom = "nouveau_fichier.txt";
+        quest2.modifierNom(nouveauNom);
+        REQUIRE_EQ(quest2.nomFichier(), nouveauNom);
+    }
+}
+
+TEST_CASE("L'accès aux questions du questionnaire fonctionne")
+{
+    sujet::questionnaire quest{};
+    quest.ajouteQuestion(std::make_unique<sujet::questionTexte>("intitule1","texte1","reponse1"));
+    quest.ajouteQuestion(std::make_unique<sujet::questionNumerique>("intitule2","texte2",10,20));
+
+    SUBCASE("Accéder à la première question")
+    {
+        REQUIRE_EQ(quest.questionIndice(0)->intitule(), "intitule1");
+    }
+    SUBCASE("Accéder à la deuxième question")
+    {
+        REQUIRE_EQ(quest.questionIndice(1)->intitule(), "intitule2");
     }
 }
