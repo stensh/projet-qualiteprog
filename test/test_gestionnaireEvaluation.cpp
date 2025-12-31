@@ -1,6 +1,5 @@
 #include <sstream>
 #include "doctest.h"
-#include "../evaluation/testsDoctest/doctest.h"
 #include "../questionnaire/questionnaire.h"
 #include "../questionnaire/questionTexte.h"
 #include "../questionnaire/questionNumerique.h"
@@ -13,6 +12,7 @@
 TEST_CASE("Le gestionnaire d'évaluation fonctionne")
 {
     sujet::questionnaire q{""};
+
     q.ajouteQuestion(
         std::make_unique<sujet::questionTexte>(
             "Capitales",
@@ -20,6 +20,7 @@ TEST_CASE("Le gestionnaire d'évaluation fonctionne")
             "Paris"
         )
     );
+
     test::gestionnaireEvaluation ge;
 
     SUBCASE("Les réponses d'une évaluation test fonctionnent")
@@ -87,5 +88,77 @@ TEST_CASE("Le gestionnaire d'évaluation fonctionne")
             REQUIRE_EQ(eval.bonnesReponses(), 1);
             REQUIRE_EQ(eval.questionsPosees(), 2);
         }
+    }
+    
+    SUBCASE("Test avec question numérique")
+    {
+        sujet::questionnaire qNum{""};
+        qNum.ajouteQuestion(std::make_unique<sujet::questionNumerique>("Q1", "Question numerique", 10, 20));
+        
+        test::evaluationTest eval{qNum};
+        std::ostringstream sortie;
+        
+        SUBCASE("Question numérique avec réponse valide")
+        {
+            std::istringstream entree("15\n");
+            ge.commencerEvaluation(eval, entree, sortie);
+            REQUIRE_EQ(eval.bonnesReponses(), 1);
+            REQUIRE_UNARY(sortie.str().find("Bonne réponse") != std::string::npos);
+        }
+        
+        SUBCASE("Question numérique avec réponse invalide")
+        {
+            std::istringstream entree("25\n");
+            test::evaluationTest eval2{qNum};
+            ge.commencerEvaluation(eval2, entree, sortie);
+            REQUIRE_EQ(eval2.bonnesReponses(), 0);
+            REQUIRE_UNARY(sortie.str().find("Mauvaise réponse") != std::string::npos);
+        }
+    }
+    
+    SUBCASE("Test avec question à choix multiples")
+    {
+        sujet::questionnaire qQCM{""};
+        qQCM.ajouteQuestion(std::make_unique<sujet::questionChoixMultiples>("Q1", "Question choix multiples\nChoix 1\nChoix 2\nChoix 3\nChoix 4", 2));
+        
+        test::evaluationTest eval{qQCM};
+        std::ostringstream sortie;
+        
+        SUBCASE("Question à choix multiples avec bonne réponse")
+        {
+            std::istringstream entree("2\n");
+            ge.commencerEvaluation(eval, entree, sortie);
+            REQUIRE_EQ(eval.bonnesReponses(), 1);
+            REQUIRE_UNARY(sortie.str().find("Bonne réponse") != std::string::npos);
+        }
+        
+        SUBCASE("Question à choix multiples avec mauvaise réponse")
+        {
+            std::istringstream entree("3\n");
+            test::evaluationTest eval2{qQCM};
+            ge.commencerEvaluation(eval2, entree, sortie);
+            REQUIRE_EQ(eval2.bonnesReponses(), 0);
+            REQUIRE_UNARY(sortie.str().find("Mauvaise réponse") != std::string::npos);
+        }
+    }
+    
+    SUBCASE("Test de l'affichage des résultats")
+    {
+        sujet::questionnaire q{""};
+        q.ajouteQuestion(std::make_unique<sujet::questionTexte>("Q1", "Question 1", "R1"));
+        q.ajouteQuestion(std::make_unique<sujet::questionTexte>("Q2", "Question 2", "R2"));
+        
+        test::evaluationTest eval{q};
+        std::ostringstream sortie;
+        std::istringstream entree("R1\nR2\n");
+        
+        ge.commencerEvaluation(eval, entree, sortie);
+        
+        std::string sortieStr = sortie.str();
+        REQUIRE_UNARY(sortieStr.find("RÉSULTATS") != std::string::npos);
+        REQUIRE_UNARY(sortieStr.find("Nombre de questions") != std::string::npos);
+        REQUIRE_UNARY(sortieStr.find("Nombre d'essais") != std::string::npos);
+        REQUIRE_UNARY(sortieStr.find("Nombre de bonnes réponses") != std::string::npos);
+        REQUIRE_UNARY(sortieStr.find("/20") != std::string::npos);
     }
 }

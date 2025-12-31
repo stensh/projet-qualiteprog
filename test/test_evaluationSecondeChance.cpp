@@ -1,13 +1,13 @@
 #include <string>
 #include "doctest.h"
-#include "../evaluation/testsDoctest/doctest.h"
 #include "../questionnaire/questionnaire.h"
 #include "../questionnaire/questionTexte.h"
 #include "../evaluation/evaluationSecondeChance.h"
 
-TEST_CASE("L'évaluation seconde chance focntionne")
+TEST_CASE("L'évaluation seconde chance fonctionne")
 {
   sujet::questionnaire q{""};
+
   q.ajouteQuestion(
       std::make_unique<sujet::questionTexte>(
           "Capitales",
@@ -15,6 +15,7 @@ TEST_CASE("L'évaluation seconde chance focntionne")
           "Paris"
       )
   );
+
   test::evaluationSecondeChance e{q};
 
   SUBCASE("Reposer une question échouée fonctionne")
@@ -29,7 +30,8 @@ TEST_CASE("L'évaluation seconde chance focntionne")
 
   SUBCASE("Le calcul des résultats fontionne")
   {
-    SUBCASE("Aucun échec fonctionne"){
+    SUBCASE("Aucun échec fonctionne")
+    {
       double noteParfaite{20.0};
       e.incrementeBonnesReponses();
       e.incrementeQuestionsPosees();

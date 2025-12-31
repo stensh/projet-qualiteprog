@@ -1,12 +1,10 @@
 #include <memory>
 #include <string>
-
 #include "test/doctest.h"
 #include "questionnaire/questionnaire.h"
 #include "questionnaire/questionChoixMultiples.h"
 #include "questionnaire/questionNumerique.h"
 #include "questionnaire/questionTexte.h"
-
 
 TEST_CASE("Le questionnaire est bien construit")
 {
@@ -16,6 +14,7 @@ TEST_CASE("Le questionnaire est bien construit")
         REQUIRE_EQ("",q.nomFichier());
         REQUIRE_FALSE(q.taille());
     }
+
     SUBCASE("Questionnaire avec un nom de fichier bien construit")
     {
         std::string nomFichier{};
@@ -39,7 +38,6 @@ TEST_CASE("L'ajout d'une question se déroule normalement")
         REQUIRE_EQ(quest.taille(),1);
         REQUIRE_NE(dynamic_cast<sujet::questionNumerique*>(quest.questionIndice(0).get()),nullptr);
     }
-
 
     SUBCASE("La question ajouté est une question texte")
     {
@@ -68,6 +66,7 @@ TEST_CASE("Le questionnaire est bien vidé")
         quest.videQuestionnaire();
         REQUIRE_EQ(quest.taille(),0);
     }
+
     SUBCASE("Un questionnaire contenant une question est bien vidé")
     {
         quest.ajouteQuestion(std::make_unique<sujet::questionNumerique>("intitule","texte",45,50));
@@ -85,6 +84,7 @@ TEST_CASE("Modifier le nom du questionnaire fonctionne")
         quest.modifierNom(nouveauNom);
         REQUIRE_EQ(quest.nomFichier(), nouveauNom);
     }
+
     SUBCASE("Modifier le nom d'un questionnaire avec un nom existant")
     {
         std::string nomInitial = "ancien_fichier.txt";
@@ -105,6 +105,7 @@ TEST_CASE("L'accès aux questions du questionnaire fonctionne")
     {
         REQUIRE_EQ(quest.questionIndice(0)->intitule(), "intitule1");
     }
+
     SUBCASE("Accéder à la deuxième question")
     {
         REQUIRE_EQ(quest.questionIndice(1)->intitule(), "intitule2");

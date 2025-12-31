@@ -1,6 +1,7 @@
 #include <string>
+#include <vector>
+#include <algorithm>
 #include "doctest.h"
-#include "../evaluation/testsDoctest/doctest.h"
 #include "../questionnaire/questionnaire.h"
 #include "../questionnaire/questionTexte.h"
 #include "../evaluation/evaluationAdaptative.h"
@@ -8,6 +9,7 @@
 TEST_CASE("L'évaluation adaptative fonctionne")
 {
     sujet::questionnaire q{""};
+
     q.ajouteQuestion(
         std::make_unique<sujet::questionTexte>(
             "Capitales",
@@ -15,6 +17,7 @@ TEST_CASE("L'évaluation adaptative fonctionne")
             "Paris"
         )
     );
+
     test::evaluationAdaptative e{q};
 
     SUBCASE("Reposer une question échouée fonctionne")
@@ -64,6 +67,7 @@ TEST_CASE("L'évaluation adaptative fonctionne")
                 e.reussiteCourante();
                 REQUIRE_EQ(e.bonnesReponses(), 1);
             }
+
             SUBCASE("echecCourant() marque l'échec sans incrémenter les bonnes réponses")
             {
                 REQUIRE_EQ(e.bonnesReponses(), 0);

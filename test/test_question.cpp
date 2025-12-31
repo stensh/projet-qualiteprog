@@ -1,10 +1,8 @@
+#include <string>
 #include "test/doctest.h"
 #include "questionnaire/questionNumerique.h"
 #include "questionnaire/questionChoixMultiples.h"
 #include "questionnaire/questionTexte.h"
-
-#include <string>
-
 
 void questionBienConstruite(const sujet::question& q,const std::string& intitule,
                             const std::string& texte)
@@ -65,8 +63,17 @@ TEST_CASE("La construction d'une question est correcte")
         {
             REQUIRE_EQ(std::stoi(q.reponse()),reponse);
             REQUIRE(q.reponseJuste(std::to_string(reponse)));
+            REQUIRE_FALSE(q.reponseJuste(std::to_string(reponse+1)));
+            REQUIRE_FALSE(q.reponseJuste(std::to_string(reponse-1)));
+        }
+
+        SUBCASE("La méthode contenu() fonctionne")
+        {
+            std::string contenuAttendu = intitule + '\n' + texte;
+            REQUIRE_EQ(q.contenu(), contenuAttendu);
         }
     }
+
     SUBCASE("La construction d'une question texte est correcte")
     {
         std::string reponse{"reponse"};
@@ -77,10 +84,17 @@ TEST_CASE("La construction d'une question est correcte")
             questionBienConstruite(q,intitule,texte);
         }
         
-        SUBCASE("Les données de la classe question à choix multiples")
+        SUBCASE("Les données de la classe question texte")
         {
             REQUIRE_EQ(q.reponse(), reponse);
             REQUIRE(q.reponseJuste(reponse));
+            REQUIRE_FALSE(q.reponseJuste("mauvaise reponse"));
+            REQUIRE_FALSE(q.reponseJuste(reponse + " "));
+        }
+        SUBCASE("La méthode contenu() fonctionne")
+        {
+            std::string contenuAttendu = intitule + '\n' + texte;
+            REQUIRE_EQ(q.contenu(), contenuAttendu);
         }
     }
 }

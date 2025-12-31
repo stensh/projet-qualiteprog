@@ -14,6 +14,7 @@ TEST_CASE("Test des différents codes d'erreurs")
         gq.chargeQuestionnaire(q,code);
         REQUIRE_EQ(code,1);
     }
+
     SUBCASE("Code de retour 2")
     {
         std::string nomFichier = "../test/QuestionnaireDoctestCode2.txt";
@@ -156,6 +157,7 @@ TEST_CASE("Test de la fonction analyseQuestions")
     int code;
     std::string nomFichier = {};
     sujet::questionnaire q{nomFichier};
+
     SUBCASE("Analyse réussie avec plusieurs questions")
     {
         std::istringstream fichier("[QT]\n"
@@ -206,6 +208,7 @@ TEST_CASE("Test la taille d'un questionnaire")
         sujet::questionnaire q{};
         REQUIRE_EQ(q.taille(), 0);
     }
+
     SUBCASE("Taille augmente après ajout de question")
     {
         sujet::questionnaire q{};
