@@ -21,7 +21,7 @@ TEST_CASE("L'évaluation seconde chance fonctionne")
   SUBCASE("Reposer une question échouée fonctionne")
   {
     const std::string premiere_question = e.questionCourante()->contenu();
-    e.marquerEchec();
+    e.echecCourant();
     e.questionSuivante();
     REQUIRE_UNARY(e.resteQuestions());
     REQUIRE_EQ(e.questionCourante()->contenu(), premiere_question);
@@ -42,9 +42,9 @@ TEST_CASE("L'évaluation seconde chance fonctionne")
     SUBCASE("Le calcule avec un échec et un deuxième essai réussi fonctionne")
     {
       double notePasParfaite{15.0};
-      e.marquerEchec();
+      e.echecCourant();
       e.questionSuivante();
-      e.incrementeBonnesReponses();
+      e.reussiteCourante();
       e.questionSuivante();
       REQUIRE_EQ(e.resultats(), notePasParfaite);
     }
@@ -52,9 +52,9 @@ TEST_CASE("L'évaluation seconde chance fonctionne")
     SUBCASE("Le calcule avec double échec fonctionne")
     {
       double noteNulle{0.0};
-      e.marquerEchec();
+      e.echecCourant();
       e.questionSuivante();
-      e.marquerEchec();
+      e.echecCourant();
       REQUIRE_UNARY(e.afficherBonneReponse());
       e.questionSuivante();
       REQUIRE_EQ(e.resultats(), noteNulle);
@@ -79,18 +79,21 @@ TEST_CASE("L'évaluation seconde chance fonctionne")
 
     SUBCASE("La logique de réussite fonctionne")
     {
-      e.marquerReussite();
+      e.reussiteCourante();
       e.questionSuivante();
-      // Après une réussite, la question ne doit pas être reposée
+      // Après une réussite, on passe à la question suivante (ou on termine si c'était la dernière)
+      // Pour une seule question, après réussite et questionSuivante, il ne reste plus de questions
       REQUIRE_UNARY_FALSE(e.resteQuestions());
     }
 
     SUBCASE("La logique d'échec fonctionne")
     {
-      e.marquerEchec();
+      const std::string question_avant = e.questionCourante()->contenu();
+      e.echecCourant();
       e.questionSuivante();
-      // Après un échec, la question doit être reposée
+      // Après un premier échec, la question doit être reposée (on reste sur la même)
       REQUIRE_UNARY(e.resteQuestions());
+      REQUIRE_EQ(e.questionCourante()->contenu(), question_avant);
     }
   }
 }

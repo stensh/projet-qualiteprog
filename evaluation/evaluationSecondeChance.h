@@ -28,14 +28,11 @@ namespace test
         void questionSuivante() override;
         double resultats() const override;
 
-        // Méthodes propres à la classe
-        void marquerReussite();
-        void marquerEchec();
-
     private:
         int d_positionCourante; // Position actuelle dans le tableau d'indices
-        std::vector<int> d_toutesLesQuestions; // Indices de toutes les questions (du questionnaire et reposées)
+        std::vector<int> d_ordreQuestions; // Ordre des questions du questionnaire
         std::map<int, int> d_nbEssais; // Clé entre l'indice de la question et le nombre d'essais
+        bool d_enSecondeTentative; // Indique si on est en train de reposer une question
     };
 }
 

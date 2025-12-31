@@ -1,6 +1,7 @@
 #ifndef PROJET_QUALITEPROG_EVALUATIONADAPTATIVE_H
 #define PROJET_QUALITEPROG_EVALUATIONADAPTATIVE_H
 
+#include <set>
 #include "evaluation.h"
 
 /**
@@ -31,6 +32,8 @@ namespace test
     private:
         int d_nbEssais, d_positionOrdre;
         std::vector<int> d_ordreQuestions;
+        std::set<int> d_questionsAjouteesPourReprise; // Questions déjà ajoutées pour reprise
+        bool d_phaseReprise; // Indique si on est dans la phase de reprise des questions échouées
 
         void melangerQuestions(); // Mélanger l'ordre des questions
     };
