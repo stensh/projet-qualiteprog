@@ -1,12 +1,21 @@
 #include <string>
+#include "doctest.h"
 #include "../evaluation/testsDoctest/doctest.h"
 #include "../questionnaire/questionnaire.h"
 #include "../evaluation/evaluationSecondeChance.h"
 
 TEST_CASE("L'évaluation seconde chance focntionne")
 {
-  sujet::questionnaire q{"fichierTest.txt"};
+  sujet::questionnaire q{""};
+  q.ajouteQuestion(
+      std::make_unique<sujet::questionTexte>(
+          "Capitales",
+          "Quelle est la capitale de la France ?",
+          "Paris"
+      )
+  );
   test::evaluationSecondeChance e{q};
+
   SUBCASE("Reposer une question échoué fonctionne")
   {
     const std::string premiere_question = e.questionCourante()->contenu();
@@ -16,6 +25,7 @@ TEST_CASE("L'évaluation seconde chance focntionne")
     REQUIRE_EQ(e.questionCourante()->contenu(), premiere_question);
     REQUIRE_UNARY_FALSE(e.afficherBonneReponse());
   }
+
   SUBCASE("Le calcul des résultats fontionne")
   {
     SUBCASE("Aucun échec fonctionne"){
@@ -25,6 +35,7 @@ TEST_CASE("L'évaluation seconde chance focntionne")
       e.questionSuivante();
       REQUIRE_EQ(e.resultats(), noteParfaite);
     }
+
     SUBCASE("Le calcule avec un échec et un deuxième essai réussi fonctionne")
     {
       double notePasParfaite{15.0};
@@ -33,7 +44,8 @@ TEST_CASE("L'évaluation seconde chance focntionne")
       e.incrementeBonnesReponses();
       e.questionSuivante();
       REQUIRE_EQ(e.resultats(), notePasParfaite);
-    } 
+    }
+
     SUBCASE("Le calcule avec double échec fonctionne")
     {
       double noteNulle{0.0};
