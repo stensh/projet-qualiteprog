@@ -3,7 +3,7 @@
 namespace test
 {
     evaluationSecondeChance::evaluationSecondeChance(const sujet::questionnaire &q)
-        : evaluation{q}, d_toutesLesQuestions{}, d_nbEssais{}, d_positionCourante{0}
+        : evaluation{q}, d_positionCourante{0}, d_toutesLesQuestions{}, d_nbEssais{}
     {
         for (int i = 0; i < nbQuestions(); ++i)
         {
