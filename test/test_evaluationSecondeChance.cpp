@@ -16,7 +16,7 @@ TEST_CASE("L'évaluation seconde chance focntionne")
   );
   test::evaluationSecondeChance e{q};
 
-  SUBCASE("Reposer une question échoué fonctionne")
+  SUBCASE("Reposer une question échouée fonctionne")
   {
     const std::string premiere_question = e.questionCourante()->contenu();
     e.marquerEchec();
@@ -55,6 +55,39 @@ TEST_CASE("L'évaluation seconde chance focntionne")
       REQUIRE_UNARY(e.afficherBonneReponse());
       e.questionSuivante();
       REQUIRE_EQ(e.resultats(), noteNulle);
+    }
+
+    SUBCASE("Marquer la réussite ou l'échec fonctionne")
+    {
+      SUBCASE("Incrémenter les bonnes réponses et marque la réussite fonctionne")
+      {
+        REQUIRE_EQ(e.bonnesReponses(), 0);
+        e.reussiteCourante();
+        REQUIRE_EQ(e.bonnesReponses(), 1);
+      }
+
+      SUBCASE("Marquer l'échec sans incrémenter les bonnes réponses fonctionne")
+      {
+        REQUIRE_EQ(e.bonnesReponses(), 0);
+        e.echecCourant();
+        REQUIRE_EQ(e.bonnesReponses(), 0);
+      }
+    }
+
+    SUBCASE("La logique de réussite fonctionne")
+    {
+      e.marquerReussite();
+      e.questionSuivante();
+      // Après une réussite, la question ne doit pas être reposée
+      REQUIRE_UNARY_FALSE(e.resteQuestions());
+    }
+
+    SUBCASE("La logique d'échec fonctionne")
+    {
+      e.marquerEchec();
+      e.questionSuivante();
+      // Après un échec, la question doit être reposée
+      REQUIRE_UNARY(e.resteQuestions());
     }
   }
 }
