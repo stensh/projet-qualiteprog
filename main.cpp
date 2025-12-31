@@ -11,7 +11,6 @@
 #include "evaluation/evaluationSecondeChance.h"
 #include "questionnaire/gestionnaireQuestionnaire.h"
 
-//Commentaire de push
 
 void chargerQuestionnaire(sujet::questionnaire& q)
 {
