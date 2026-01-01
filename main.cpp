@@ -14,7 +14,7 @@
 
 void chargerQuestionnaire(sujet::questionnaire& q)
 {
-    std::cout << "Veuillez rentrer le chemin d'accès absolue du questionnaire à charger : "<<std::endl;
+    std::cout << "Veuillez entrer le chemin d'accès absolu du questionnaire à charger : "<<std::endl;
     std::string nomFichier;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::getline(std::cin, nomFichier); //getline pour entré des noms de fichier avec des espaces
@@ -25,11 +25,11 @@ void chargerQuestionnaire(sujet::questionnaire& q)
     gestQ.chargeQuestionnaire(q,code);
     switch(code)
     {
-        case 1: std::cout<<"Le fichier n'a pas pu être ouvert, il est possible que celui-ci n'existe pas. Essayez avec un autre fichier :"<<std::endl;
+        case 1: std::cout<<"Le fichier n’a pas pu être ouvert ; il est possible que celui-ci n’existe pas. Essayez avec un autre fichier."<<std::endl;
             break;
-        case 2: std::cout<<"Le fichier n'est pas un fichier questionnaire, essayez avec un autre fichier :"<<std::endl;
+        case 2: std::cout<<"Le fichier n’est pas un fichier de questionnaire, essayez avec un autre fichier."<<std::endl;
             break;
-        case 3: std::cout<<"Une erreur est survenu lors de la lecture du fichier, corrigé le fichier ou essayé un autre fichier :"<<std::endl;
+        case 3: std::cout<<"Une erreur est survenue lors de la lecture du fichier, corrigez le fichier ou essayez-en un autre."<<std::endl;
             break;
     }
 }

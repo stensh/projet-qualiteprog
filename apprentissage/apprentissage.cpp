@@ -6,7 +6,7 @@ namespace revision
 
     void apprentissage::attendreEntreeQuestion(std::ostream& ost,std::istream& ist)
     {
-        ost << "\nAppuyez sur Entree pour passer à la question suivante...";
+        ost << "\nAppuyez sur Entree pour passer à la question suivante...\n";
         ist.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
 
