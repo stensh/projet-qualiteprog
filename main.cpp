@@ -1,7 +1,7 @@
 #include <iostream>
 #include <limits>
 #ifdef _WIN32
-#include <windows.h>
+#include <windows.h>    //Utile uniquement si on est sous Windows 10/11
 #endif
 
 #include "apprentissage/apprentissage.h"
@@ -143,7 +143,7 @@ void run()
 int main()
 {
     #ifdef _WIN32
-    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleOutputCP(CP_UTF8);    //Utile uniquement si on est sous Windows 10/11
     #endif
     run();
     return 0;
