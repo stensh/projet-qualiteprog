@@ -41,7 +41,7 @@ TEST_CASE("L'évaluation seconde chance fonctionne")
 
     SUBCASE("Le calcule avec un échec et un deuxième essai réussi fonctionne")
     {
-      double notePasParfaite{15.0};
+      double notePasParfaite{20.0};
       e.echecCourant();
       e.questionSuivante();
       e.reussiteCourante();

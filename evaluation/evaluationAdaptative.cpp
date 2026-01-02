@@ -28,6 +28,16 @@ namespace test
 
     const std::unique_ptr<sujet::question> &evaluationAdaptative::questionCourante() const
     {
+        if (d_positionOrdre >= static_cast<int>(d_ordreQuestions.size()))
+        {
+            // Si on est hors limites, retourner la dernière question valide
+            if (d_ordreQuestions.empty())
+            {
+                return questionnaireCourant().questionIndice(0);
+            }
+            int indiceReel = d_ordreQuestions.back();
+            return questionnaireCourant().questionIndice(indiceReel);
+        }
         int indiceReel{d_ordreQuestions[d_positionOrdre]}; // retrouve l'indice réel de la question
         return questionnaireCourant().questionIndice(indiceReel);
     }
