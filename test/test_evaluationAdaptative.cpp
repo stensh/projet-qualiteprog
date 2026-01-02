@@ -36,17 +36,18 @@ TEST_CASE("L'évaluation adaptative fonctionne")
             double noteParfaite {20.0};
             e.incrementeBonnesReponses();
             e.incrementeQuestionsPosees();
+            e.incrementeNbEssais();
             REQUIRE_EQ(e.resultats(), noteParfaite);
         }
 
         SUBCASE("Le calcul avec un échec et un deuxième essai réussi fonctionne")
         {
-            double noteParfaite {20.0};
+            double noteMoyenne {10.0};
             e.questionSuivante();
             e.marquerEchec();
             e.incrementeBonnesReponses();
             e.questionSuivante();
-            REQUIRE_EQ(e.resultats(), noteParfaite); // parti du principe que ça compte comme réussi
+            REQUIRE_EQ(e.resultats(), noteMoyenne);
         }
 
         SUBCASE("Le calcul avec double échec fonctionne")

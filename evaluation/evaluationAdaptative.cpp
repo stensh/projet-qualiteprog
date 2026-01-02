@@ -77,7 +77,7 @@ namespace test
     void evaluationAdaptative::questionSuivante()
     {
         incrementeQuestionsPosees();
-        ++d_nbEssais;
+        incrementeNbEssais();
         ++d_positionOrdre;
         
         if (!d_phaseReprise && d_positionOrdre >= nbQuestions())
@@ -110,6 +110,11 @@ namespace test
                 d_questionsAjouteesPourReprise.insert(indiceQuestion);
             }
         }
+    }
+
+    void evaluationAdaptative::incrementeNbEssais()
+    {
+        ++d_nbEssais;
     }
 
 }
