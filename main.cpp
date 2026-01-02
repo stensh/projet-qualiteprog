@@ -17,7 +17,7 @@ void chargerQuestionnaire(sujet::questionnaire& q)
     std::cout << "Veuillez entrer le chemin d'accès absolu du questionnaire à charger : "<<std::endl;
     std::string nomFichier;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    std::getline(std::cin, nomFichier); //getline pour entré des noms de fichier avec des espaces
+    std::getline(std::cin, nomFichier); //getline pour entrer des noms de fichier avec des espaces
 
     q.modifierNom(nomFichier);
     sujet::gestionnaireQuestionnaire gestQ;
@@ -56,7 +56,7 @@ int menuEvaluation()
     {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout<<"L'option saisie n'est pas valide, veuillez reessayer :"<<std::endl;
+        std::cout<<"L'option saisie n'est pas valide, veuillez réessayer :"<<std::endl;
         std::cin>>n;
     }
     return n;
@@ -117,7 +117,7 @@ int menuPrincipal()
     {
         std::cin.clear();   //Réinitialise les flags d'erreur pour permettre les saisies suivantes
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout<<"L'option saisie n'est pas valide, veuillez reesayer :"<<std::endl;
+        std::cout<<"L'option saisie n'est pas valide, veuillez réessayer :"<<std::endl;
         std::cin>>n;
     }
     return n;

@@ -6,13 +6,13 @@ namespace revision
 
     void apprentissage::attendreEntreeQuestion(std::ostream& ost,std::istream& ist)
     {
-        ost << "\nAppuyez sur Entree pour passer à la question suivante...\n";
+        ost << "\nAppuyez sur Entrée pour passer à la question suivante...\n";
         ist.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
 
     void apprentissage::attendreEntreeReponse(std::ostream& ost,std::istream& ist)
     {
-        ost << "\nAppuyez sur Entree pour afficher la réponse...";
+        ost << "\nAppuyez sur Entrée pour afficher la réponse...";
         ist.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
 
@@ -27,7 +27,7 @@ namespace revision
             if (i < q.taille() - 1)  // Seulement si ce n'est pas la dernière question
                 attendreEntreeQuestion(ost,ist);
         }
-        ost<<std::endl<<std::endl<< "Apprentissage terminée\nAppuyé sur Entree pour revenir au menu...";
+        ost<<std::endl<<std::endl<< "Apprentissage terminé\nAppuyez sur Entrée pour revenir au menu...";
         ist.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
 
