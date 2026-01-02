@@ -34,6 +34,7 @@ namespace test
         std::vector<int> d_ordreQuestions;
         std::set<int> d_questionsAjouteesPourReprise; // Questions déjà ajoutées pour reprise
         bool d_phaseReprise; // Indique si on est dans la phase de reprise des questions échouées
+        bool d_terminerApresReprise; // Indique qu'on doit terminer après avoir reposé toutes les questions
 
         void melangerQuestions(); // Mélanger l'ordre des questions
     };
